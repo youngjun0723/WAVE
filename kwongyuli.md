@@ -1,5 +1,7 @@
-# JAVA Boostcoures
-### 2023-05-01 1일차 스터디
+JAVA Boostcourse
+=============
+2023-05-01 1일차 스터디
+-------------
 
 <pre>
 <code>
@@ -49,4 +51,3 @@ JLabel label = new JLabel("Hello World!!", SwingConstants.CENTER);
 </pre>
 </code>
 
----
