@@ -1,17 +1,22 @@
 # JAVA Boostcoures
-### 2023-05-01
+### 2023-05-01 1일차 스터디
 
-'''JAVA
+<pre>
+<code>
 public class HelloWorldApp {
 	public static void main(String[] args) {
 		System.out.println("Hello World!!");
 	}
 }
-'''
-** 데스크톱 애플리케이션 만들기 **
-- 기본 코드
+</pre>
+</code>
 
-'''JAVA
+- 데스크톱 애플리케이션 만들기
+
+	- 기본 코드
+
+<pre>
+<code>
 import javax.swing.*;   
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -33,12 +38,15 @@ public class HelloWorldGUIApp{
         });
     }
 }
-'''
+</pre>
+</code>
 
 - 수정해본 코드
 
-'''JAVA
+<pre>
+<code>
 JLabel label = new JLabel("Hello World!!", SwingConstants.CENTER);
-'''
+</pre>
+</code>
 
 ---
