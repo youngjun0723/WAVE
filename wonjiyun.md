@@ -1,5 +1,6 @@
 <h1>5월 1일 boostcorse 쉽게 배우는 자바1<h1>
 <h2>2-1</h2>
+
 <pre><code>
 public class MyClass {
     public static void main(String args[]) {
