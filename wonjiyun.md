@@ -8,7 +8,7 @@ public class MyClass {
 }
 
 #결과: Hello World!
-</code><pre>
+</code></pre>
 
 <pre><code>
 public class MyClass {
