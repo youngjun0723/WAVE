@@ -167,19 +167,19 @@ System.out.println() 을 sout -> Ctrl+Space 을 하면 자동입력
 
 문자열과 숫자 연산의 차이
 
-	   System.out.printl(6); number
-	   System.out.printl("six"); string
-	   System.out.printl("6"); string 6
-	   System.out.printl(6+6); 12
-	   System.out.printl("6"+"6"); 66
-	   System.out.printl(6*6); 36
-	   System.out.printl("1111".length()); 4
+	   System.out.println(6); number
+	   System.out.println("six"); string
+	   System.out.println("6"); string 6
+	   System.out.println(6+6); 12
+	   System.out.println("6"+"6"); 66
+	   System.out.println(6*6); 36
+	   System.out.println("1111".length()); 4
 
 다른 연산
 
-	   System.out.printl(Math.PI);//파이 3.14159~
-	   System.out.printl(Math.floor(Math.PI));//올림 4
-	   System.out.printl(Math.ceil(Math.PI));//내림 5
+	   System.out.println(Math.PI);//파이 3.14159~
+	   System.out.println(Math.floor(Math.PI));//올림 4
+	   System.out.println(Math.ceil(Math.PI));//내림 5
 
 
 'Character', "String"
@@ -188,8 +188,87 @@ System.out.println() 을 sout -> Ctrl+Space 을 하면 자동입력
 쌍따옴표를 문장안에 사용하려면 /"@@@/" 형태로 사용
 
 
-	   System.out.printl("Hello World"/length); //11
+	   System.out.println("Hello World"/length); //11
 	   
-	   System.out.printl("Hello [[[name]]]".replace("[[[name]]]","@@@"));
+	   System.out.println("Hello [[[name]]]".replace("[[[name]]]","@@@"));
 
 replace는 앞 문자열에서 원하는 부분을 바꿀수있음 .replace("앞 문자열의 바꿀부분","대신 넣을 부분") 
+
+
+===============================================================
+
+0503 - 자바 1 : 챕터 8,9,10 강의내용 정리
+
+변수 (variable)
+
+정수형 변수 -> int(eger)
+실수형 변수 -> double
+문자열 -> String
+
+int a = 1;
+System.out.println(a);
+
+실행값 -> 1
+
+
+
+
+변수 지정의 효용
+
+String name = "ccc";  // ccc를 name 에 저장
+System.out.println("aaa "+name+" bbb");
+
+실행값 -> aaa ccc bbb
+
+double aaa = 10; //숫자에도 적용가능
+System.out.println(aaa);
+
+실행값 -> 10 
+
+
+
+데이터 타입 변환
+
+double a = 1.1;
+double b = 1;            
+double c = (double) 1;   // 위 코드를 자세히 풀어쓴것
+
+~~int d = 1.1;~~     // 소수점 아래부터 인식을 못해 사라짐
+double e = 1.1;      // 올바른 형태
+int f = (int)1.1;    // 실수를 정수로 변환시킴
+
+
+String g = Integer.toString(1);   // 1 이라는 숫자를 문자로 인식시킴
+System.out.println(g);
+
+
+
+프로그래밍은 업무의 자동화된 처리를 위해서라고 할 수 있음
+
+
+
+String HOME = "Rian APT 503"; // HOME에 내 주소를 할당
+
+Elevator myElevator = new Elevator(HOME);
+myElevator.callForUp(1); // 엘리베이터를 부름
+
+
+Security mySecurity = new Security(HOME);
+mySecurity.off(); // 내 집(HOME)의 보안을 끔
+
+
+Lighting hallLamp = new Lighting(HOME + " / Hall Lamp");
+hallLamp.on(); 
+
+Lighting floorLamp = new Lighting(HOME + " / floorLamp");
+floorLamp.on();
+
+Lighting roomLamp = new Lighting(HOME + " / RoomLamp");
+roomLamp.on();
+
+
+
+디버거
+
+프로그램을 한줄한줄 단위로 실행시켜 좀더 자세한 실행 과정을 볼 수 있다
+
