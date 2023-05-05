@@ -272,3 +272,109 @@ roomLamp.on();
 
 프로그램을 한줄한줄 단위로 실행시켜 좀더 자세한 실행 과정을 볼 수 있다
 
+
+============================================================
+
+
+0504 - 자바 1 : 챕터 11,12 강의내용 정리
+
+
+프로그램의 입력과 출력
+
+다이어로그를 이용해  id 값을 사용자가 설정하게 해주는 코드
+
+JOptionPane 객체의 showInputDialog 메소드를 이용하여 id값을 사용자가 입력하게 할 수 있다
+JOptionPane 객체를 이용하기 위해서 import 구문을 사용함
+
+
+import javax.swing.JOptionPane;
+
+import org.opentutorials.iot.DimmingLights;
+import org.opentutorials.iot.Elevator;
+import org.opentutorials.iot.Lighting;
+import org.opentutorials.iot.Security;
+
+public class OKjavaGoInHomeInput {
+
+    public static void main(String[]args){
+        String id = JOptionPane.showInputDialog("Enter a ID");  // JOptionPane의 showInputDialog를 이용하여 정보를 String 데이터로 받음 (id)
+        String bright = JOptionPane.showInputDialog("Enter a Bright level");  // 밝기 값 또한 받음
+
+        // Elevator call
+        Elevator myElevator = new Elevator(id);
+        myElevator.callForUp(1);
+
+        // Security off
+        Security mySecurity = new Security(id);
+        mySecurity.off();
+
+        // Light on
+        Lighting hallLamp = new Lighting(id+" / Hall Lamp");
+        hallLamp.on();
+         
+        Lighting floorLamp = new Lighting(id+" / floorLamp");
+        floorLamp.on();
+
+        DimmingLights moodLamp = new DimmingLights(id+"moodLamp"); 
+        moodLamp.setbright(Double.parseDouble(bright)); // setbright 메소드를 통해 밝기값을 double 데이터로 받는다
+        moodLamp.on(); 
+    }
+}
+
+
+아규먼트를 이용해 프로그램 실행시키기
+
+main 메소드의 args 파라미터를 이용하여 코드내의 값을 더욱 편하게 설정가능
+
+ex)
+public static void main(String[]args){
+        String id = args[0];
+        String bright = args[1];
+}
+
+아규먼트 값을 다양하게 사용하여 결과값을 알아볼 수 있다
+args는 문자열 배열로 여러개의 String 데이터가 들어있을 수 있다
+인덱스는 0부터 시작함
+
+아규먼트(argument)
+파라미터(parameter)
+배열(array)
+
+
+
+
+자바로 직접 프로그래밍 하기
+컴파일
+
+명령어 프롬포트에서 진행가능
+
+cd 명령어를 통해 프로젝트 파일로 이동
+cd C:@@@@  //프로젝트 파일 경로
+
+javac 명령어로 다른 명령어 사용법을 확인가능하다
+
+javac Program.java // 컴파일시 Program.class 생성 
+java Program // Program.class를 실행함 (실행시에는 .class 생략)
+
+
+다른 라이브러리의 사용하는 프로그램의 컴파일
+
+jacac -cp ".;@@" aa.java
+
+aa 자바파일이 존재하는 현재 폴더와 외부 라이브러리 @@ 폴더에서 필요한 자바 파일을 컴파일 한다
+
+-cp = --class-path
+".;@@" 의 . 은 현재폴더
+윈도우는 ;
+맥이나 리눅스는 :
+
+실행시에는
+java -cp ".;@@" aa
+꼴로 실행가능
+
+
+직접 컴파일/실행 시 아규먼트 값 설정방법
+
+javac @@.jave // 컴파일시킴
+java @@ "aa" 11  // 아규먼트 값은 클래스 파일 실행 명령어 이후 바로 적어서 값을 설정 가능하다
+
