@@ -302,21 +302,116 @@ public class OkJavaGoInHome {
 
 - 디버거
 
-버그는 우리가 짠 코드의 의도하지 않은 문제를 말한다.
+  버그는 우리가 짠 코드의 의도하지 않은 문제를 말한다.
 
-그 버그를 잡는 행위를 디버깅이라 하고 디버깅을 할 때 사용하는 도구를 디버거라 부른다.
+  그 버그를 잡는 행위를 디버깅이라 하고 디버깅을 할 때 사용하는 도구를 디버거라 부른다.
 
-현대적인 개발 도구들은 내부적으로 디버거를 가지고 있다.
+  현대적인 개발 도구들은 내부적으로 디버거를 가지고 있다.
 
 - 프로그램이 실행되는 것을 멈추고 싶을 때:
 
-멈추고 싶은 곳에서 더블 클릭을 한다 그러면 점이 생기는데 이 점을 breakpoint라 한다.
+  멈추고 싶은 곳에서 더블 클릭을 한다 그러면 점이 생기는데 이 점을 breakpoint라 한다.
 
-그리고 벌레버튼을 누른다.
+  그리고 벌레버튼을 누른다.
 
-그럼 화면 구성이 바뀌고 중지된 상태로 화면이 멈춘다.
+  그럼 화면 구성이 바뀌고 중지된 상태로 화면이 멈춘다.
 
-디버거를 이용하면 프로그램을 한줄한줄 실행시킬 수 있고(Step Over) 실행되는 그 순간에 애플리케이션 내의 변수의 상태를 하나하나 체크할 수 있다.
+  디버거를 이용하면 프로그램을 한줄한줄 실행시킬 수 있고(Step Over) 실행되는 그 순간에 애플리케이션 내의 변수의 상태를 하나하나 체크할 수 있다.
 
-디버거를 끝내고 싶을 땐 빨간색 버튼의 터미네이터를 클릭하고 우측 상단에 J(java) 버튼을 클릭한다.
+  디버거를 끝내고 싶을 땐 빨간색 버튼의 터미네이터를 클릭하고 우측 상단에 J(java) 버튼을 클릭한다.
+
+	***
+
+2023-05-04 4일차 스터디
+-------------
+
+- 프로그램은 들어오는 정보인 입력을 처리해서 출력을 만들어내는 기계이다.
+
+- input(입력값):
+
+  Argument(프로그램을 실행할 때 텍스트 정보를 주는 것), File, Network, Audio, Program
+
+- output(결과): Monitor, File, Audio, Program
+
+- OkJavaGoInHomeInput.java
+
+<pre><code>
+import javax.swing.JOptionPane;
+
+import org.opentutorials.iot.DimmingLights;
+import org.opentutorials.iot.Elevator;
+import org.opentutorials.iot.Lighting;
+import org.opentutorials.iot.Security;
+
+public class OkJavaGoInHomeInput {
+	
+	// parameter, 매개변수 = args에 사용자가 입력한 값이 들어올 것이다
+	// 문자열 뒤에 대괄호를 붙이면 문자열로만 이루어져 있는 배열이라는 데이터
+	public static void main(String[] args) {
+		
+		// String id = JOptionPane.showInputDialog("Enter a ID");
+		String id = args[0];
+		//String bright = JOptionPane.showInputDialog("Enter a Bright level");
+		String bright = args[1];
+		// 창을 만들어낸다
+
+		// Elevator call
+		Elevator myElevator = new Elevator(id);
+		myElevator.callForUp(1);
+		
+		// Security off
+		Security mySecurity = new Security(id);
+		mySecurity.off();
+		
+		// Light on
+		Lighting hallLamp = new Lighting(id+ " / Hall Lamp");
+		hallLamp.on();
+		
+		Lighting floorLamp = new Lighting(id+ " / floor Lamp");
+		floorLamp.on();
+		
+		DimmingLights moodLamp = new DimmingLights(id+ " moodLamp");
+		moodLamp.setBright(Double.parseDouble(bright));
+		// bright는 String이지만 입력값으로 들어온 문자가 double 형으로 바뀐다
+		moodLamp.on();
+	}
+
+} 
+</code></pre>
+
+- Runconfiguration
+
+  입력값을 줄 때 Arguments에 값을 입력하면 된다.
+
+  여러개의 값을 줄 땐 “입력값1” “입력값2” ...
+
+  Arguments를 입력하게 되면 main 메소드의 args parameter는 argument 값을 받아서 동작한다.
+
+- args
+
+  문자열 배열(array)로 여러 개의 String 데이터가 들어올 수 있다.
+
+  인덱스 0번부터 시작한다. ( args[0] )
+
+- cmd
+	- 외부 라이브러리도 포함해서 컴파일하기
+
+	<pre><code>
+	javac -cp ";lib" OkJavaGoInHome.java
+	</code></pre>
+
+	- 외부 라이브러리도 포함해서 실행하기
+
+	<pre><code>
+	java -cp ";lib" OkJavaGoInHome
+	</code></pre>
+
+	- 직접 컴파일 실행
+
+	<pre><code>
+	javac OkJavaGoInHomeInput.java
+	java OkJavaGoInHomeInput "JAVA APT 707" 15.0
+	// 띄어쓰기로 파라미터를 구분한다
+	</code></pre>
+	
 
