@@ -354,3 +354,139 @@ java -cp ".:lib" OkJavaGoInHome(macOS, Linux)
 *실행할 때 아규먼트 입력하기
 org.opentutorials.iot 패키지는 다시 lib 폴더 밖으로 꺼낸다 -> OkJavaGoInHomeInput.java를 컴파일 -> 
 터미널에서 아규먼트를 주기 위해서는 실행할 클래스 파일 이름 다음에 연달아서 입력 java OkJavaGoInHomeInput "JAVA APT 507" 15.0
+
+13-1
+프로그램(Program) : 작업들의 시간적 순서에 주목
+애플리케이션(Application) : 도구의 응용에 주목
+자바 API(Application Programming Interface) :  자바는 자바의 도구들을 응용해서 사용하기 위해서 일정한 조작 장치를 구성, 다른 프로그램에서 사용할 수 있도록 만들어둔 장치 (프로그램이 사용)
+UI(User Interface) : 사용자가 자바 프로그램을 사용할 수 있도록 만들어둔 장치들(사용자가 사용)
+ ex 커맨드 라인 시스템의 아규먼트, 데스크톱 앱의 버튼, 웹 페이지의 링크 등
+
+13-2
+패키지 : 서로 비슷한 성격의 클래스를 모아서 이름을 붙인 것 (클래스들을 그루핑해서 이름 붙인 것,클래스(들)을 하나의 묶음으로 정리)
+클래스 : 서로 연관된 변수와 메소드를 모아 이름을 붙인 것 (변수와 메소드를 그루핑)
+
+13-3
+public class ClassApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(Math.PI);
+		System.out.println(Math.floor(1.6)); //1.0
+		System.out.println(Math.ceil(1.6)); //2.0
+		//Math 클래스, PI 변수, floor ceil 메소드
+		
+	}
+
+}
+
+
+13-4
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+public class InstanceApp {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		PrintWriter p1 = new PrintWriter("result1.txt"); 
+		//클래스가 하는 작업이 일회용이 아니라긴 맥락의 작업을 해야한다면 그떄는 클래스를 복제한 인스턴스를 만들어서 그것을 사용할 수 있도록 사용자에게 제공하는 것이 효율적
+		//new뒤에 붙인게 컨스트럭터 , 컨스트럭터 앞에 new를 붙이면 복제되서 인스턴스가 되고,  그 인스턴스에 어떤 값이 올 수 있느냐를 규제하기 위해서 앞에다가 PrintWriter라고 하는 클래스의 이름을 적는다. 
+	    p1.write("Hello 1");
+		p1.close();//파일을 더 이상 붙잡고 있지 않는다
+		
+		PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		p1.write("Hello 1");
+		
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		PrintWriter.write("result1.txt","Hello 1");
+		PrintWriter.write("result2.txt","Hello 2");
+		//한번 파일에 쓰기 작업을 수행할 때마다 일일이 파일의 이름을 입력해 줘야 한다는 단점이 있다.
+
+	}
+
+}
+
+13-5
+들여쓰기되어 표현된 각각의 클래스 간의 관계는 상속 관계를 나타낸다.
+자식에 해당하는 클래스는 부모에 해당하는 클래스의 모든 변수와 메소드를 사용할 수 있다.
+이클립스 안에서 Open Type hierarchy를 이용하여 클래스의 상속관계를 확인할 수 있다. 
+
+PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		System.out.println(p1.toString());
+		p2.toString();
+		//printWriter는 writer를 writer는 object를 상속 받고 있기 떄문에 p2.toString();라는 메소드를 사용할 수 있다.
+
+
+
+14-2
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Value of supply : "+10000.0);
+		System.out.println("VAT : "+(10000.0*0.1));
+		System.out.println("Total : "+(10000.0 + 10000.0*0.1));
+		System.out.println("Expense : "+(10000.0*0.3));
+		System.out.println("Income : "+(10000.0 - 10000.0*0.3));
+		System.out.println("Dividend 1 : "+(10000.0 - 10000.0*0.3)*0.5);
+		System.out.println("Dividend 2 : "+(10000.0 - 10000.0*0.3)*0.3);
+		System.out.println("Dividend 3 : "+(10000.0 - 10000.0*0.3)*0.2);
+		
+		
+	}
+
+}
+Edit -> Find/Replace -> 숫자 10000.0을 12345.0으로 바꿀 수 있다
+
+14-3
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		double valueOfSupply = 12345.0;
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double VAT = valueOfSupply*vatRate;
+		double total = valueOfSupply + VAT;
+		double expense = valueOfSupply*expenseRate;
+		double Income = valueOfSupply - expense;
+		double dividend1 = Income*0.5;
+		double dividend2 = Income*0.3;
+		double dividend3 = Income*0.2;
+		
+		System.out.println("Value of supply : "+valueOfSupply);
+		System.out.println("VAT : "+VAT);
+		System.out.println("Total : "+total);
+		System.out.println("Expense : "+expense);
+		System.out.println("Income : "+Income);
+		System.out.println("Dividend 1 : "+dividend1);
+		System.out.println("Dividend 2 : "+dividend2);
+		System.out.println("Dividend 3 : "+dividend3);
+		//Refactor -> Extract Local Variable
+		
+	}
+
+}
+
+14-4
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		double valueOfSupply = Double.parseDouble(args[0]);
+	}
+}
