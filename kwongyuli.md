@@ -239,7 +239,6 @@ public class StringOperation {
 }
 </code></pre>
 
-***
 
 2023-05-03 스터디
 -------------
@@ -298,6 +297,7 @@ public class OkJavaGoInHome {
 	}
 
 } // 자동화의 열쇠가 프로그래밍이다
+
 </code></pre>
 
 - 디버거
@@ -320,7 +320,6 @@ public class OkJavaGoInHome {
 
   디버거를 끝내고 싶을 땐 빨간색 버튼의 터미네이터를 클릭하고 우측 상단에 J(java) 버튼을 클릭한다.
 
-	***
 
 2023-05-04 4일차 스터디
 -------------
@@ -414,4 +413,145 @@ public class OkJavaGoInHomeInput {
 	// 띄어쓰기로 파라미터를 구분한다
 	</code></pre>
 	
+	2023-05-08 5일차 스터디
+-------------
+
+- Application Programming Interface
+
+자바가 기본적으로 제공하는 부품들의 조작방법을 API라 한다.
+
+Program은 시간의 순서에 따라서 실행된다는 시간이 강조된 표현 (시간의 순서)을 말한다.
+
+Application은 자바가 제공하는 부품들을 응용해서 Application 해서 만든다는 응용이 강조된 표현을 말한다.
+
+즉 우리가 자바를 응용해서 프로그래밍적으로 실행되는 프로그램을 만들기 위해서 사용해야 되는 조작 방법을 말한다.
+
+- User Interface
+
+사용자가 우리가 만든 프로그램을 조작하기 위해 사용하는 조작 장치라는 뜻에서 UI라고 부른다.
+
+우리가 만든 프로그램을 사용자가 사용하지 않고 또 다른 부품으로 사용될 수도 있다.
+
+- 상속
+
+java.lang.Object
+
+	java.io.Writer
+
+		java.io.PrintWriter
+
+PrintWriter(자식)은 Writer(부모)라는 클래스를 상속받았다.
+
+Wirter(자식)은 Object(부모)를 상속받았다.
+
+PrintWriter class를 우클릭해서 Open Type Hierarchy 클릭하면 상속관계를 볼 수 있다.
+
+Object 자바의 가장 기본적인 class이며 모든 class는 Object를 상속 받는다.
+
+- Override
+
+Writer class에도 write method가 있고, PrintWriter class에도 write method가 있다면 이는 PrintWriter의 write가 Writer의 write를 덮어쓰기 했다고 한다.
+
+= 오버라이드 했다
+
+- classApp
+
+<pre><code>
+public class ClassApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(Math.PI);
+		System.out.println(Math.floor(1.6)); // 소수점 없애기
+		System.out.println(Math.ceil(1.6)); // 소수점 무조건 올리기
+		// class는 서로 연관된 변수와 메소드를 모아서 이름을 붙인 것
+		// 얘네들은 다 일회용
+
+	}
+
+}
+</code></pre>
+
+- InstanceApp
+
+<pre><code>
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class InstanceApp {
+
+	public static void main(String[] args) throws IOException {
+		
+		PrintWriter p1 = new PrintWriter("result1.txt");
+		// 괄호 안에 내가 저장하고 싶은 파일의 이름을 적는다
+		// 저 변수에 담겨있는 무언가를 PrintWriter라는 class의 instance라 한다
+		// p1에 아무거나 들어가면 안 되기 때문에
+		// PrintWriter라는 class의 instance만 들어간다는 뜻에서 데이터타입을 저것으로 지정
+		p1.write("Hello 1");
+		p1.close();
+		
+		PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		p2.toString();
+		
+		// 동시에 여러개의 파일을 작업해야 할 땐 하나의 클래스를 사용하는 것보다 하나의 클래스 앞에 new를 붙여
+		// 복제하여 각각의 다른 상태를 가지고 있는 인스턴스를 만들어 사용하는 것이 더 효율적이다
+		
+		// Constructor가 없으면 일회용
+		// 이를 이용해 인스턴스를 만드는 것이 허용되어 있다는 것
+		// new 뒤에 붙인 것
+		// 인스턴스는 p1
+
+	}
+
+}
+</code></pre>
+
+- AccountingApp
+
+<pre><code>
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		double vauleOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double vat = vauleOfSupply*vatRate;
+		double total = vauleOfSupply+vat;
+		double expense = vauleOfSupply*expenseRate;
+		double income = vauleOfSupply-expense;
+		double dividend1 = income * 0.5;
+		double dividend2 = income * 0.3;
+		double dividend3 = income * 0.2;
+		
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ vat );
+		System.out.println("Total : "+ total );
+		System.out.println("Expense : "+ expense );
+		System.out.println("Income : "+ income );
+		System.out.println("Dividend : "+ dividend1 );
+		System.out.println("Dividend : "+ dividend2 );
+		System.out.println("Dividend : "+ dividend3 );
+		
+		// Edit -> Find/Replace... 10000.0의 값 전체를 바꿔준다
+		// 값 우클릭 -> Refactor -> Extract Local Variable...
+
+	}
+
+}
+</code></pre>
+
+- Package
+
+정리정돈의 도구
+
+서로 연관된 비슷한 성격의 class를 모아서 이름을 붙인 것
+
+- class
+
+Package에 속해있는 것들 
+
+서로 연관된 변수(Variable)와 메소드(method)를 모아서 이름을 붙인 것
 
