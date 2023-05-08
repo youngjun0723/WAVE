@@ -422,41 +422,41 @@ public class OkJavaGoInHomeInput {
 
 - Application Programming Interface
 
-자바가 기본적으로 제공하는 부품들의 조작방법을 API라 한다.
+  자바가 기본적으로 제공하는 부품들의 조작방법을 API라 한다.
 
-Program은 시간의 순서에 따라서 실행된다는 시간이 강조된 표현 (시간의 순서)을 말한다.
+  Program은 시간의 순서에 따라서 실행된다는 시간이 강조된 표현 (시간의 순서)을 말한다.
 
-Application은 자바가 제공하는 부품들을 응용해서 Application 해서 만든다는 응용이 강조된 표현을 말한다.
+  Application은 자바가 제공하는 부품들을 응용해서 Application 해서 만든다는 응용이 강조된 표현을 말한다.
 
-즉 우리가 자바를 응용해서 프로그래밍적으로 실행되는 프로그램을 만들기 위해서 사용해야 되는 조작 방법을 말한다.
+  즉 우리가 자바를 응용해서 프로그래밍적으로 실행되는 프로그램을 만들기 위해서 사용해야 되는 조작 방법을 말한다.
 
 - User Interface
 
-사용자가 우리가 만든 프로그램을 조작하기 위해 사용하는 조작 장치라는 뜻에서 UI라고 부른다.
+  사용자가 우리가 만든 프로그램을 조작하기 위해 사용하는 조작 장치라는 뜻에서 UI라고 부른다.
 
-우리가 만든 프로그램을 사용자가 사용하지 않고 또 다른 부품으로 사용될 수도 있다.
+  우리가 만든 프로그램을 사용자가 사용하지 않고 또 다른 부품으로 사용될 수도 있다.
 
 - 상속
 
-java.lang.Object
+  java.lang.Object
 
-	java.io.Writer
+   java.io.Writer
 
-		java.io.PrintWriter
+    java.io.PrintWriter
 
-PrintWriter(자식)은 Writer(부모)라는 클래스를 상속받았다.
+  PrintWriter(자식)은 Writer(부모)라는 클래스를 상속받았다.
 
-Wirter(자식)은 Object(부모)를 상속받았다.
+  Wirter(자식)은 Object(부모)를 상속받았다.
 
-PrintWriter class를 우클릭해서 Open Type Hierarchy 클릭하면 상속관계를 볼 수 있다.
+  PrintWriter class를 우클릭해서 Open Type Hierarchy 클릭하면 상속관계를 볼 수 있다.
 
-Object 자바의 가장 기본적인 class이며 모든 class는 Object를 상속 받는다.
+  Object 자바의 가장 기본적인 class이며 모든 class는 Object를 상속 받는다.
 
 - Override
 
-Writer class에도 write method가 있고, PrintWriter class에도 write method가 있다면 이는 PrintWriter의 write가 Writer의 write를 덮어쓰기 했다고 한다.
+  Writer class에도 write method가 있고, PrintWriter class에도 write method가 있다면 이는 PrintWriter의 write가 Writer의 write를 덮어쓰기 했다고 한다.
 
-= 오버라이드 했다
+  = 오버라이드 했다
 
 - classApp
 
@@ -549,13 +549,13 @@ public class AccountingApp {
 
 - Package
 
-정리정돈의 도구
+  정리정돈의 도구
 
-서로 연관된 비슷한 성격의 class를 모아서 이름을 붙인 것
+  서로 연관된 비슷한 성격의 class를 모아서 이름을 붙인 것
 
 - class
 
-Package에 속해있는 것들 
+  Package에 속해있는 것들 
 
-서로 연관된 변수(Variable)와 메소드(method)를 모아서 이름을 붙인 것
+  서로 연관된 변수(Variable)와 메소드(method)를 모아서 이름을 붙인 것
 
