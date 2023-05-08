@@ -415,9 +415,9 @@ public class OkJavaGoInHomeInput {
 	// 띄어쓰기로 파라미터를 구분한다
 	</code></pre>
 	
-	***
+***
 
-	2023-05-08 5일차 스터디
+2023-05-08 5일차 스터디
 -------------
 
 - Application Programming Interface
