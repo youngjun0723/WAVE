@@ -239,6 +239,7 @@ public class StringOperation {
 }
 </code></pre>
 
+***
 
 2023-05-03 스터디
 -------------
@@ -320,6 +321,7 @@ public class OkJavaGoInHome {
 
   디버거를 끝내고 싶을 땐 빨간색 버튼의 터미네이터를 클릭하고 우측 상단에 J(java) 버튼을 클릭한다.
 
+***
 
 2023-05-04 4일차 스터디
 -------------
@@ -413,6 +415,8 @@ public class OkJavaGoInHomeInput {
 	// 띄어쓰기로 파라미터를 구분한다
 	</code></pre>
 	
+	***
+
 	2023-05-08 5일차 스터디
 -------------
 
