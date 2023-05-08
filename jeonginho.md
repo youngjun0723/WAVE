@@ -321,7 +321,7 @@ public class OkJavaGoInHomeInput {
 
 >> * 2023-05-04 11,12 END 
 
-> * 2023-05-08 [Chapter 13 ~ 14.4] 
+> * 2023-05-08 [Chapter 13 ~ 14.4]-
 
 > Chapter 13 - 1 자바 문서 보는 법 - API vs UI
 
