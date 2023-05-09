@@ -319,4 +319,182 @@ public class OkJavaGoInHomeInput {
 
 >> 커맨드 라인에서 우리가 임의값을 추가하여 프로그램을 작동시킨다면 이것만으로 충분히 많은 일을 가치있게 할 수 있다. 
 
->> 2023-05-04 11,12 END
+>> * 2023-05-04 11,12 END 
+
+> * 2023-05-08 [Chapter 13 ~ 14.4]-
+
+> Chapter 13 - 1 자바 문서 보는 법 - API vs UI
+
+>> 자바 프로그램 : 자바 도구 응용 + 시간적 순서에 따른 동작
+
+>> 프로그램 : 작업들의 시간적 순서에 주목
+
+>> 애플리케이션 : 도구의 응용에 주목
+
+>> 자바 API : 자바의 도구들을 응용하여 사용하기 위해서 일정한 조작 장치를 구성 한 것.
+
+>> *자바 프로그램은 다른 자바 프로그램에서 사용이 가능하며 다른 프로그램에서 사용할 수 있도록 만들어 둔 장치 또한 API이다.
+
+>> UI : 사용자가 자바 프로그램을 사용할 수 있도록 만들어 둔 장치
+
+> Chapter 13 - 2 자바 문서 보는 법 - 패키지, 클래스, 변수, 메소드
+
+>> 자바 프로그램을 만들기 위해서는 자바의 도구들을 사용할 수 있게 만든 장치인 자바 API를 이용한다.
+
+>> API Documentation 페이지 왼쪽의 위쪽 섹션에는 패키지들에 대한 정보를 담고 있고, 왼쪽의 아래 섹션에는 클래스에 대한 정보를 담고 있다.
+
+>> 패키지는 비슷한 성격의 클래스들을 하나의 묶음으로 정리한 것.
+
+>> 클래스는 변수와 메소드라는 것을 모아서 하나의 묶음으로 정리한 것.
+
+> Chapter 13 - 3 자바 문서 보는 법 - 클래스
+<pre><code>
+public class ClassApp {
+ 
+    public static void main(String[] args) {
+         
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.6));
+        System.out.println(Math.ceil(1.6));
+    }
+}
+</code></pre>
+# 결과 : 3.141592653689793, 1.0, 2.0
+>> 위 코드는 수학과 관련된 작업을 해야하며 파이의 크기를 출력하기 위하여 math라는 클래스를 불러들여 출력하는 코드이다.
+
+>> 위와 같이 클래스를 불러들여 원하는 값을 출력하기 위해선 (Math.PI)처럼 클래스.값 을 넣어야 한다.
+
+>> 클래스는 서로 연관된 변수와 메소드들을 모아서 이름을 붙이고 묶음으로 정리한 것.
+
+> Chapter 13 - 4 자바 문서 보는 법 - 인스턴스
+
+>> 클래스 안에는 변수와 메소드가 존재한다.
+
+>> 인스턴스는 클래스에 있는 속성을 사용하는 복제품을 만드는 것이다. 단 인스턴스를 사용하려면 클래스안에 constructor가 있어야 한다.
+
+>> 클래스중에 constructor가 없는 클래스(예:Math)는 인스턴스로 사용하지 못하는 클래스. 즉, 인스턴스를 사용하려면 해당 클래스에 constructor가 있어야 한다.
+
+> Chapter 13 - 5 자바 문서 보는 법 - 상속
+<pre><code>
+//Class PrintWriter
+
+java.lang.Object
+    java.io.Writer
+        java.io.PrintWriter
+</code></pre>
+>> 1. 들여쓰기 되어 표현된 각각의 클래스 간의 관계는 상속 관계.
+
+>> PrintWriter 클래스는 Writer 클래스에서 상속을 받음.
+
+>> Writer클래스는 Object 클래스로부터 상속을 받음.
+
+>> 2. 자식에 해당하는 클래스는 부모에 해당하는 클래스의 모든 변수와 메소드를 사용할 수 있다.
+
+>> 3. 그래서 PrintWriter 클래스는 Writer의 write 메소드를 사용할 수 있고
+, Object의 toString 메소드를 사용할 수 있다.
+
+> Chapter 14 - 2 나의 앱 만들기 - 오리엔테이션
+> Chapter 14 - 3 나의 앱 만들기 - 기본 기능 구현
+<pre><code>
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Value of supply : " + 10000.0);
+        System.out.println("VAT : " + (10000.0 * 0.1));
+        System.out.println("Total : " + (10000.0 + (10000.0 * 0.1)));
+        System.out.println("Expense : " + (10000.0 * 0.3));
+        System.out.println("Income : " + (10000.0 - (10000.0 * 0.3)));
+        System.out.println("Dividend 1 : " + (10000.0 - (10000.0 * 0.3)) * 0.5);
+        System.out.println("Dividend 2 : " + (10000.0 - (10000.0 * 0.3)) * 0.3);
+        System.out.println("Dividend 3 : " + (10000.0 - (10000.0 * 0.3)) * 0.2);
+
+	}
+
+}
+</code></pre>
+>> * 오리엔테이션에서 궁리한 문제에 대한 해결책을 제시하는 코드. 
+
+>> 공급가를 10000.0 으로 잡고 시작.
+
+>> 부가 가치세는 10000.0에 0.1.을 곱한 10000.0 * 0.1.
+
+>> 총 판매가는 공급가와 부가가치세를 합한 10000.0 + (10000.0 * 0.1).
+비용은 판매가의 30%이므로 10000.0 * 0.3.
+
+>> 수익은 판매가에 비용을 뺀 값이므로 10000.0 - (10000.0 * 0.3).
+
+>> 첫 번째 배당자는 수익의 50%를 배당받으므로 (10000.0 - (10000.0 * 0.3)) * 0.5.
+
+>> 두 번째 배당자는 수익의 30%를 배당받으므로 (10000.0 - (10000.0 * 0.3)) * 0.3.
+
+>> 세 번째 배당자는 수익의 20%를 배당받으므로 (10000.0 - (10000.0 * 0.3)) * 0.2.
+
+> Chapter 14 - 3 나의 앱 만들기 - 변수도입
+<pre><code>
+public class AccountingApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = 10000.0; // 공급가
+        double vatRate = 0.1; // 부가가치세율
+        double expenseRate = 0.3; 
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+        double dividend1 = income * 0.5;
+        double dividend2 = income * 0.3;
+        double dividend3 = income * 0.2;
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+ 
+    }
+ 
+}
+</code></pre>
+>> 변수를 도입하면 코드의 재사용성을 높이고 가독성을 높일 수 있다.
+
+> Chapter 14 - 4 나의 앱 만들기 - 입력값 도입
+<pre><code>
+public class AccountingApp {
+ 
+    public static void main(String[] args) {
+ 
+        double double valueOfSupply = Double.parseDouble(args[0]);
+        // 공급가
+        double vatRate = 0.1; // 부가가치세율
+        double expenseRate = 0.3; 
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+        double dividend1 = income * 0.5;
+        double dividend2 = income * 0.3;
+        double dividend3 = income * 0.2;
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+ 
+    }
+ 
+}
+</code></pre>
+>> valueOfSupply(공급가)에 입력값을 입력받아 공급가를 사용자가 지정할 수 있도록 코드를 수정했다.
+
+>> 터미널에서 실행할 시 : javac 명령어로 AccountingApp.java를 컴파일하고 java 명령어로 AccountingApp을 실행하고 아규먼트로 원하는 공급가액을 입력하여 실행하면 valueOfSupply에 내가 직접 지정한 값으로 계산을 하여 값이 반환된다.
+
+>> * 2023-05-08 13 ~ 14-4 END 
