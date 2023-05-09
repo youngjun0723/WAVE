@@ -490,3 +490,271 @@ public class AccountingApp {
 		double valueOfSupply = Double.parseDouble(args[0]);
 	}
 }
+
+This is an H1
+=============
+This is an H2
+-------------
+# This is a H1
+14-6
+조건문
+
+public class AccountingAppIf {
+
+	public static void main(String[] args) {
+		
+		double valueOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double VAT = valueOfSupply*vatRate;
+		double total = valueOfSupply + VAT;
+		double expense = valueOfSupply*expenseRate;
+		double Income = valueOfSupply - expense;
+		
+		double dividend1;
+		double dividend2;
+		double dividend3;
+		
+		
+		if(Income>10000.0) {
+			dividend1 = Income*0.5;
+		    dividend2 = Income*0.3;
+		    dividend3 = Income*0.2;
+		}
+		else {
+			dividend1 = Income*1;
+		    dividend2 = Income*0;
+		    dividend3 = Income*0;
+		}
+	}
+}
+## This is a H2
+14-7
+배열
+
+double rate1 = 0.5;
+double rate2 = 0.3;
+double rate3 = 0.2;
+
+double dividend1 = Income*rate1;
+double dividend2 = Income*rate2;
+double dividend3 = Income*rate3;
+//변수가 많으면 변수가 더럽혀질 가능성이 커진다는 문제점이 있다, 세개의 변수가 서로 같은 성격의 데이터라는게 분명하지 않다.
+
+double[] dividendRates = new double[3];//double형 데이터로 이루어진 배열 이다 / double형의 데이터를 3개를 담을 수 있는 수납상자
+dividendRates[0] = 0.5;
+dividendRates[1] = 0.3;
+dividendRates[2] = 0.2;
+		
+double dividend1 = Income*dividendRates[0];
+double dividend2 = Income*dividendRates[1];
+double dividend3 = Income*dividendRates[2];
+//각각의 값들이 연관된 값들이라는걸 분명히 할 수 있다, 변수가 줄어들어 변수가 더럽혀질 가능성이 현저히 줄어들었다는 장점이 있다.
+
+### This is a H3
+14-8
+반복문
+
+double[] dividendRates = new double[3];//double형 데이터로 이루어진 배열 이다 / double형의 데이터를 3개를 담을 수 있는 수납상자
+dividendRates[0] = 0.5;
+dividendRates[1] = 0.3;
+dividendRates[2] = 0.2;
+		
+		
+int i=0; //몇번반복됐는지를 i라는 변수에 기록
+while(i<dividendRates.length) {  
+	// i의 값이 (dividendRates의 길이)3보다 작은동안 실행
+      System.out.println("Dividend : "+(Income*dividendRates[i]));
+	i=i+1;//i의 값이 1씩 증가
+}
+
+#### This is a H4
+14-9
+메소드 : 서로 연관된 코드를 그루핑해서 이름을 붙인 정리정돈의 상자
+
+double VAT = getVAT(valueOfSupply, vatRate); //Refactor -> Extract Method...//만들어진 메소드를 호출하는 실행하는 코드//괄호안의 값은 입력값
+
+	private static double getVAT(double valueOfSupply, double vatRate) {
+		return valueOfSupply*vatRate; 
+	}//Method를 만드는 코드
+
+//private static double getVAT()이렇게 되면 에러 =>  valueOfSupply가 현재 main메소드 중괄호 안에서 선언되었으므로 main메소드 안에서만 사용 가능한 지역 변수
+// valueOfSupply를 AccountingMethodApp클래스의 전역 변수로 지정해서 모든 메소드에서 접근할 수 있도록 해야한다 -> main메소드 밖에서 선언(public static double valueOfSupply;)
+// Refactor -> Convert Local Variable to Field... -> public 선택
+
+
+double total = getTotal(vat);
+
+public static double getTotal(double vat) {
+		return valueOfSupply + vat;
+
+
+double total = getTotal();
+
+public static double getTotal() {
+		return valueOfSupply + getVAT(); 
+// vat가 지역변수인데 얘를 전역변수로 만들 수도있지만 그렇게 하지 않고 그냥  getVAT()를 호출하는 걸로 똑같은 목적을 달성할 수 있다.
+
+
+public class AccountingMethodApp {
+	public static double valueOfSupply;
+	public static double vatRate;
+	public static double expenseRate;
+	public static void main(String[] args) {
+		
+		valueOfSupply = 10000.0;
+		vatRate = 0.1;
+		expenseRate = 0.3;		
+		print();
+		
+		
+	}
+
+	public static void print() {
+		System.out.println("Value of supply : "+valueOfSupply);
+		System.out.println("VAT : "+getVAT());
+		System.out.println("Total : "+getTotal());
+		System.out.println("Expense : "+getExpense());
+		System.out.println("Income : "+getIncome());
+		System.out.println("Dividend 1 : "+getDiviend1());
+		System.out.println("Dividend 2 : "+getDiviend2());
+		System.out.println("Dividend 3 : "+getDiviend3());
+	}
+
+	public static double getDiviend1() {
+		return getIncome()*0.5;
+	}
+
+	public static double getDiviend2() {
+		return getIncome()*0.3;
+	}
+	
+	public static double getDiviend3() {
+		return getIncome()*0.2;
+	}
+	
+	public static double getIncome() {
+		return valueOfSupply - getExpense();
+	}
+
+	public static double getExpense() {
+		return valueOfSupply*expenseRate;
+	}
+
+	public static double getTotal() {
+		return valueOfSupply + getVAT();
+	}
+
+	private static double getVAT() {
+		return valueOfSupply*vatRate; 
+	}//Method를 만드는 코드
+//private static double getVAT()이렇게 되면 에러 =>  valueOfSupply가 현재 main메소드 중괄호 안에서 선언되었으므로 main메소드 안에서만 사용 가능한 지역 변수
+	// valueOfSupply를 AccountingMethodApp클래스의 전역 변수로 지정해서 모든 메소드에서 접근할 수 있도록 해야한다 -> main메소드 밖에서 선언(public static double valueOfSupply;)
+	// Refactor -> Convert Local Variable to Field... -> public 선택
+}
+}
+}
+
+##### This is a H5
+14-10
+클래스
+class Accounting{
+	public static double valueOfSupply;
+	public static double vatRate;
+	public static double expenseRate;
+	
+	public static void print() {
+		System.out.println("Value of supply : "+valueOfSupply);
+		System.out.println("VAT : "+getVAT());
+		System.out.println("Total : "+getTotal());
+		System.out.println("Expense : "+getExpense());
+		System.out.println("Income : "+getIncome());
+		System.out.println("Dividend 1 : "+getDiviend1());
+		System.out.println("Dividend 2 : "+getDiviend2());
+		System.out.println("Dividend 3 : "+getDiviend3());
+	}
+
+	public static double getDiviend1() {
+		return getIncome()*0.5;
+	}
+
+	public static double getDiviend2() {
+		return getIncome()*0.3;
+	}
+	
+	public static double getDiviend3() {
+		return getIncome()*0.2;
+	}
+	
+	public static double getIncome() {
+		return valueOfSupply - getExpense();
+	}
+
+	public static double getExpense() {
+		return valueOfSupply*expenseRate;
+	}
+
+	public static double getTotal() {
+		return valueOfSupply + getVAT();
+	}
+
+	private static double getVAT() {
+		return valueOfSupply*vatRate; 
+	}
+}
+
+public class AccountingClassApp {
+	
+	public static void main(String[] args) {
+		Accounting.valueOfSupply = 10000.0;
+		Accounting.vatRate = 0.1;
+		Accounting.expenseRate = 0.3;		
+		Accounting.print();
+		// anotherVariable = ...;
+		// anotherMethod = ...;
+		
+	}
+}
+
+###### This is a H6
+14-11
+인스턴스 : 하나의 클래스를 복제해서 서로 다른 데이터의 값과 서로 같은 메소드를 가진 복제본을 만드는 것이다.
+
+public class AccountingClassApp {
+	
+	public static void main(String[] args) {
+		Accounting.valueOfSupply = 10000.0;
+		Accounting.vatRate = 0.1;
+		Accounting.expenseRate = 0.3;	
+		Accounting.print();
+		//...
+		Accounting.valueOfSupply = 20000.0;
+		Accounting.vatRate = 0.05;
+		Accounting.expenseRate = 0.2;	
+		Accounting.print();
+		//...
+		
+		Accounting.valueOfSupply = 20000.0;
+		Accounting.vatRate = 0.05;
+		Accounting.expenseRate = 0.2;	
+		Accounting.print();
+		
+	}
+}
+// 이 과정이 빈번하게 발샐한다고 한다면 이렇게 클래스의 내부적인 상태를 바꾸는 행위가 버그를 우발할 가능성이 매우 높다.
+
+ instance : 클래스 앞에 new를 붙여서 만들어진 것
+		// 이 코드가 사용되기 위해선 static이라는 키워드가 사용되면 안된다.
+		Accounting a1 = new Accounting();//new를 붙이면 Accounting클래스를 복제 // a1이라는 변수의 값에 반드시 Accounting의 복제본만 들어올 수 있다
+		a1.valueOfSupply = 10000.0;
+		a1.vatRate = 0.1;
+		a1.expenseRate = 0.3;
+		a1.print();
+		
+		Accounting a2 = new Accounting();
+		a2.valueOfSupply = 20000.0;
+		a2.vatRate = 0.05;
+		a2.expenseRate = 0.2;
+		a2.print();
+		
+		a1.print();
