@@ -559,3 +559,317 @@ public class AccountingApp {
 
   서로 연관된 변수(Variable)와 메소드(method)를 모아서 이름을 붙인 것
 
+***
+
+2023-05-09 6일차 스터디
+-------------
+
+- Method와 Class
+
+  메소드는 서로 연관된 코드를 그룹핑해서 이름을 붙인 정리정돈의 상자다
+
+	클래스는 서로 연관된 변수와 메소드를 그룹핑한 것이다 그리고 거기에 이름을 붙인 것이다 역시나 정리정돈의 상자이다
+
+	메소드와 클래스가 중요한 이유는 우리가 소프트웨어를 만들어가는 데 있어서 구조를 결정하기 때문이다
+
+	마치 우리 신체에서 뼈대와 같은 역할을 하는 것이다 = 상당히 중요함!
+
+- AccountingIFApp
+
+<pre><code>
+public class AccountingIFApp {
+
+	public static void main(String[] args) {
+		
+		double vauleOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double vat = vauleOfSupply*vatRate;
+		double total = vauleOfSupply+vat;
+		double expense = vauleOfSupply*expenseRate;
+		double income = vauleOfSupply-expense;
+		
+		double dividend1;
+		double dividend2;
+		double dividend3;
+		
+		if(income>10000.0) {
+		 dividend1 = income * 0.5;
+		 dividend2 = income * 0.3;
+		 dividend3 = income * 0.2;
+		} else {
+			dividend1 = income * 1;
+			dividend2 = income * 0;
+			dividend3 = income * 0;
+		}
+		
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ vat );
+		System.out.println("Total : "+ total );
+		System.out.println("Expense : "+ expense );
+		System.out.println("Income : "+ income );
+		System.out.println("Dividend : "+ dividend1 );
+		System.out.println("Dividend : "+ dividend2 );
+		System.out.println("Dividend : "+ dividend3 );
+		
+
+	}
+
+}
+</code></pre>
+
+- AccountingArrayApp
+
+<pre><code>
+public class AccountingArrayApp {
+
+	public static void main(String[] args) {
+		// String[] -> 문자열로 이루어져 있는 배열이라는 뜻
+		// 그 배열의 값을 가져올 때 args[0] 이렇게 해서 입력값을 가져왔다
+		// = 배열의 값을 꺼내오는 것을 보여주는 것이다
+		
+		double vauleOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double vat = vauleOfSupply*vatRate;
+		double total = vauleOfSupply+vat;
+		double expense = vauleOfSupply*expenseRate;
+		double income = vauleOfSupply-expense;
+		
+		//double rate1 = 0.5;
+		//double rate2 = 0.3;
+		//double rate3 = 0.2;
+		
+		double[] dividendRates = new double[3];
+		dividendRates[0] = 0.5;
+		dividendRates[1] = 0.3;
+		dividendRates[2] = 0.2;
+		// 서로 연관된 데이터를 정리정돈 하는 수단이 배열이다
+		// 배열과 반복문은 서로 같이 쓸 때 엄청난 시너지 효과를 가져온다
+		
+		double dividend1 = income * dividendRates[0];
+		double dividend2 = income * dividendRates[1];
+		double dividend3 = income * dividendRates[2];
+		
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ vat );
+		System.out.println("Total : "+ total );
+		System.out.println("Expense : "+ expense );
+		System.out.println("Income : "+ income );
+		System.out.println("Dividend : "+ dividend1 );
+		System.out.println("Dividend : "+ dividend2 );
+		System.out.println("Dividend : "+ dividend3 );
+		
+
+	}
+
+}
+</code></pre>
+
+- AccountingArrayLoopApp
+
+<pre><code>
+public class AccountingArrayLoopApp {
+
+	public static void main(String[] args) {
+		
+		double vauleOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double vat = vauleOfSupply*vatRate;
+		double total = vauleOfSupply+vat;
+		double expense = vauleOfSupply*expenseRate;
+		double income = vauleOfSupply-expense;
+		
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ vat );
+		System.out.println("Total : "+ total );
+		System.out.println("Expense : "+ expense );
+		System.out.println("Income : "+ income );
+		
+		double[] dividendRates = new double[3];
+		dividendRates[0] = 0.5;
+		dividendRates[1] = 0.3;
+		dividendRates[2] = 0.2;
+		
+		int i = 0; // 몇 번 반복됐는지
+		while(i < dividendRates.length) {
+			System.out.println("Dividend : "+ (income*dividendRates[i]) );
+			i = i + 1; // 반복할 때마다 i의 값을 1씩 증가시킬 것이다
+		}
+		
+		// while은 반복문의 키워드이고 중괄호 안에 있는 코드가 계속해서 반복되게 하는 것이다
+		// dividendRates.length의 값은 3
+		// 배열과 단짝이다
+
+	}
+
+}
+</code></pre>
+
+- AccountingMethodApp
+
+<pre><code>
+public class AccountingMethodApp {
+	
+	public static double vauleOfSupply;
+	public static double vatRate;
+	public static double expenseRate;
+	// 메인 메소드 밖에서 선언되었기 때문에 전역변수이다
+	// 메인 안에서도 접근할 수 있고 getVAT도 접근할 수 있다
+	// 즉 모든 메소드에서 접근할 수 있다
+	// 우클릭 -> refactor -> Convert Local Variable to Field...
+
+	public static void main(String[] args) {
+		
+		vauleOfSupply = 10000;
+		vatRate = 0.1;
+		expenseRate = 0.3;
+		
+		print();
+		
+		// vauleOfSupply는 main 메소드 중괄호 안에서 선언되었기 때문에 메인 메소드 안에서만 사용할 수 있는
+		// 지역변수 (local variable) 이다
+
+	}
+
+	public static void print() {
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ getVAT() );
+		System.out.println("Total : "+ getTotal() );
+		System.out.println("Expense : "+ getExpense() );
+		System.out.println("Income : "+ getIncome() );
+		System.out.println("Dividend : "+ getDividend1() );
+		System.out.println("Dividend : "+ getDividend2() );
+		System.out.println("Dividend : "+ getDividend3() );
+	}
+
+	public static double getDividend1() {
+		return getIncome() * 0.5;
+	}
+	
+	public static double getDividend2() {
+		return getIncome() * 0.3;
+	}
+	
+	public static double getDividend3() {
+		return getIncome() * 0.2;
+	}
+
+	public static double getIncome() {
+		return vauleOfSupply-getExpense();
+	}
+
+	public static double getExpense() {
+		return vauleOfSupply*expenseRate;
+	}
+
+	public static double getTotal() {
+		return vauleOfSupply+getVAT();
+	}
+
+	private static double getVAT() {
+		return vauleOfSupply*vatRate;
+	} // 메소드를 만드는 코드
+
+}
+
+// 메소드는 서로 연관된 코드를 정리정돈 하는 상자다
+</code></pre>
+
+- AccountingClassApp
+
+<pre><code>
+class Accounting { // class 는 파일로 치면 디렉토리 역할과 비슷하다
+	
+	public double vauleOfSupply;
+	public double vatRate;
+	public double expenseRate;
+	
+	public void print() {
+		System.out.println("Value of supply : "+vauleOfSupply);
+		System.out.println("VAT : "+ getVAT() );
+		System.out.println("Total : "+ getTotal() );
+		System.out.println("Expense : "+ getExpense() );
+		System.out.println("Income : "+ getIncome() );
+		System.out.println("Dividend : "+ getDividend1() );
+		System.out.println("Dividend : "+ getDividend2() );
+		System.out.println("Dividend : "+ getDividend3() );
+	}
+
+	public double getDividend1() {
+		return getIncome() * 0.5;
+	}
+	
+	public double getDividend2() {
+		return getIncome() * 0.3;
+	}
+	
+	public double getDividend3() {
+		return getIncome() * 0.2;
+	}
+
+	public double getIncome() {
+		return vauleOfSupply-getExpense();
+	}
+
+	public double getExpense() {
+		return vauleOfSupply*expenseRate;
+	}
+
+	public double getTotal() {
+		return vauleOfSupply+getVAT();
+	}
+
+	private double getVAT() {
+		return vauleOfSupply*vatRate;
+	} 
+}
+
+public class AccountingClassApp {
+
+	public static void main(String[] args) {
+		
+		//Accounting.vauleOfSupply = 10000;
+		//Accounting.vatRate = 0.1;
+		//Accounting.expenseRate = 0.3;
+		//Accounting.print();
+		// 상태 = 변수의 값을 말한다
+		// 이 과정이 빈번하게 발생한다면 클래스의 내부적인 상태를 바꾸는 행위가 버그를 유발할 가능성이 굉장히 높아진다
+		
+		// instance
+		Accounting a1 = new Accounting();
+		// new를 붙이면 Accounting class를 복제하는 명령이다
+		// a1의 변수의 값으로는 Accounting의 복제본만 들어올 수 있다
+		a1.vauleOfSupply = 10000.0;
+		a1.vatRate = 0.1;
+		a1.expenseRate = 0.3;
+		a1.print();
+		// class 이름 앞에 new를 붙여서 만들어진 그 무엇을 instance라 부른다
+		// 이 코드가 동작하기 위해선 static 키워드를 사용하면 안 된다
+		System.out.println("------------------------");
+		
+		Accounting a2 = new Accounting();
+		a2.vauleOfSupply = 20000.0;
+		a2.vatRate = 0.05;
+		a2.expenseRate = 0.2;
+		a2.print();
+
+	}
+	
+	// 소속관계를 명확하게 해야 다른 취지의 코드들과 뒤섞여도 상관없고, 흔한 이름의 메소드를 사용해도 같은 이름의 메소드들이
+	// 공존할 수 있게 된다 ( class가 달라야 한다 )
+
+}
+</code></pre>
+
+- instance
+
+  인스턴스는 하나의 클래스를 복제해서 서로 다른 데이터의 값과 서로 같은 메소드를 가진 복제본을 만드는 것이다
+	
+- Outline
+
+  class 안에 소속되어 있는 여러 가지 멤버들(변수, 메소드)의 리스트를 보여준다
+
+  (Window -> showview)
+
