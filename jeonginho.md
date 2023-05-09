@@ -497,4 +497,324 @@ public class AccountingApp {
 
 >> 터미널에서 실행할 시 : javac 명령어로 AccountingApp.java를 컴파일하고 java 명령어로 AccountingApp을 실행하고 아규먼트로 원하는 공급가액을 입력하여 실행하면 valueOfSupply에 내가 직접 지정한 값으로 계산을 하여 값이 반환된다.
 
->> * 2023-05-08 13 ~ 14-4 END 
+
+2023-05-08 13 ~ 14-4 END 
+-------------
+
+<hr/>
+
+<2023-05-09 / 14-5 ~ 15>
+-------------
+
+* 조건문
+<pre><code>
+public class AccountingIFApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+         
+        double dividend1;
+        double dividend2;
+        double dividend3;
+         
+        if(income > 10000.0) { 
+            // 만약 income이 10000.0원 보다 클 시 구문 실행
+            dividend1 = income * 0.5;
+            dividend2 = income * 0.3;
+            dividend3 = income * 0.2;
+        } else { 
+            // 만약 income이 10000.0원 보다 작을 시 구문 실행
+            dividend1 = income * 1.0;
+            dividend2 = income * 0;
+            dividend3 = income * 0;
+        }
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+    }
+}
+</code></pre>
+-제어문 : 프로그램의 실행 과정을 조건에 따라 바꾸는 것.   
+-제어문의 종류 : 조건문, 반복문
+* 배열
+<pre><code>
+public class AccountingArrayApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+         
+        double[] dividendRates = new double[3]; 
+        //double 형 데이터로 이루어져 있는 배열, new double[3] = double형의 데이터를 3개를 담을 수 있는 수납공간이 만들어 짐.
+        dividendRates[0] = 0.5;
+        dividendRates[1] = 0.3;
+        dividendRates[2] = 0.2;
+         
+        double dividend1 = income * dividendRates[0];
+        double dividend2 = income * dividendRates[1];
+        double dividend3 = income * dividendRates[2];
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+    }
+}
+</code></pre>
+-배열 : 서로 연관된 데이터를 정리정돈하는 수단
+
+* 반복문(while)
+<pre><code>
+public class AccountingArrayLoopApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+         
+         
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+         
+        double[] dividendRates = new double[3];
+        dividendRates[0] = 0.5;
+        dividendRates[1] = 0.3;
+        dividendRates[2] = 0.2;
+         
+             
+        int i = 0; // 반복하기전 i를 0으로 초기화시킴.
+        while(i < dividendRates.length) {
+            // 3보다 i의 값이 작을 동안 
+            // 반복할 때 마다 i의 값을 1씩 증가시킨다.
+            System.out.println("Dividend : " + (income*dividendRates[i]) );
+            i = i + 1;
+        }
+    }
+}
+</code></pre>
+-배열과 반복문을 함께 사용하면 프로그램을 훨씬 간결하게 만들 수 있다.   
+-while 문은 괄호 안의 조건이 참인 한 블록내의 작업을 계속 반복한다.
+-반복문은 배열과 단짝.
+
+* 메소드
+<pre><code>
+public class AccountingMethodApp {
+    //valueOFsupply, vatRate, expenseRate를 main 바깥에서 선언.
+    //전역변수로 선언하면 main뿐만 아니라 어느곳에서든 사용될 수 있다.
+    public static double valueOfSupply;
+    public static double vatRate;
+    public static double expenseRate;
+    public static void main(String[] args) {
+        valueOfSupply = 10000.0;
+        vatRate = 0.1;
+        expenseRate = 0.3;
+        print();
+    }
+ 
+    public static void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public static double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public static double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public static double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public static double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public static double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+}
+</code></pre>
+-메소드 : 서로 연관된 코드를 그룹핑해서 이름을 붙인 정리정돈된 상자
+ex) Math의 floor, ceil, PrintWriter의 write, close등.   
+-메소드로 전역변수를 설정할 시 main함수 안에서 따로 지역변수를 지정하지 않아도 사용자가 많은 함수를 만들 시 미리 만들어놓은 Public 전역변수를 호출하여 코드를 단정하게 만들 수 있다.
+
+* 클래스
+<pre><code>
+//ClassApp
+class Accounting{
+    //AccountingApp 소속의 변수들을 이사시킴.
+    public static double valueOfSupply;
+    public static double vatRate;
+    public static double expenseRate;
+    public static void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public static double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public static double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public static double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public static double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public static double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+}
+public class AccountingClassApp {
+     
+    public static void main(String[] args) {
+        //기존 변수 앞에 Class로 선언한 Accounting.을 붙여 소속관계를 명확하게 할 수 있다.
+        Accounting.valueOfSupply = 10000.0;
+        Accounting.vatRate = 0.1;
+        Accounting.expenseRate = 0.3;
+        Accounting.print();
+        // anotherVariable = ...;
+        // anotherMethod = ...;
+    }
+}
+</code></pre>
+-클래스는 서로 연관된 변수와 메소드를 그룹핑한 것. (정리정돈의 상자)   
+-메소드, 클래스 등이 중요한 이유는 소프트웨어를 만들어 감에 있어서 구조를 결정하기 때문.   
+-클래스는 객체지향의 핵심이다.
+
+* 인스턴스
+<pre><code>
+class Accounting{
+    public double valueOfSupply;
+    public double vatRate;
+    public double expenseRate;
+    public void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+}
+public class AccountingClassApp {
+     
+    public static void main(String[] args) {
+        // instance 
+        Accounting a1 = new Accounting(); // Class를 복제함.
+        a1.valueOfSupply = 10000.0;
+        a1.vatRate = 0.1;
+        a1.expenseRate = 0.3;
+        a1.print(); 
+        // Accounting1의 내부 상태는 모두 같아서 a2 이후에 print 문을 선언해도 상관없다.
+         
+        Accounting a2 = new Accounting(); // Class를 복제함
+        a2.valueOfSupply = 20000.0;
+        a2.vatRate = 0.05;
+        a2.expenseRate = 0.2;
+        a2.print();
+    }
+}
+</code></pre>
+-인스턴스는 하나의 클래스를 복제해서 서로 다른 데이터의 값과 서로 같은 메소드를 가진 복제본을 만드는 것.   
+-위 코드에서 new Accounting()을 사용하여 Class를 복제함.  
+-따라서 Class이름 앞에 new를 붙여서 만든 것을 인스턴스라고 함.   
+-이 후 Public static에서 static을 빼도 코드에 오류가 없음.
+
+<2023-05-09 / 14-5 ~ 15 END>
+-------------
+
+<hr/>
