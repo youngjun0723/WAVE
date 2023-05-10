@@ -873,3 +873,330 @@ public class AccountingClassApp {
 
   (Window -> showview)
 
+***
+
+2023-05-10 7일차 스터디
+-------------
+
+- BooleanApp
+
+<pre><code>
+package java_flow_control;
+
+public class BooleanApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("One");
+		System.out.println(1);
+		
+		System.out.println(true);
+		System.out.println(false);
+		
+		String foo = "Hello World";
+		// String true = "Good";
+		// true, false는 변수의 이름으로 사용할 수 없다
+		// 이미 쓰이고 있는 컴퓨터 언어
+		// = reserved word
+		
+		System.out.println(foo.contains("World")); // true
+		// .contains는 그 문자열에 입력값으로 전달할 어떠한 값이 들어있다면 true를 return하고,
+		// 없다면 false를 return 한다
+		System.out.println(foo.contains("egoing")); // false
+
+	}
+
+}
+</code></pre>
+
+- ComparisonOperatorApp
+
+<pre><code>
+package java_flow_control;
+
+public class ComparisonOperatorApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1 > 1); // false
+		System.out.println(1 == 1); // true
+		System.out.println(1 < 1);
+		System.out.println(1 >= 1);
+		System.out.println(1 <= 1);
+		
+		// 비교연산자는 왼쪽에 있는 값과 오른쪽에 있는 값을 비교해서 그 결과가 무엇이냐에 따라서
+		// true or false 둘중 하나의 값을 만들어내는 연산자이다
+	}
+
+}
+</code></pre>
+
+- IfApp
+
+<pre><code>
+package java_flow_control;
+
+public class IfApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("a");
+//		if(false) {
+//			System.out.println(1);
+//		} else {
+//			if(true) {
+//			System.out.println(0);
+//			} else {
+//				System.out.println(00);
+//			}
+//		}
+		
+		if(false) {
+			System.out.println(1);
+		} else if (true) {
+			System.out.println(2);
+		} else {
+			System.out.println(3);
+		}
+		
+		System.out.println("b");
+		
+		// if문 () 안에는 boolean만이 저 값이 될 수 있다
+		// () 안의 값이 true일 때만 실행된다
+		// 변화 가능하도록 바꾸어야 한다
+	}
+
+}
+</code></pre>
+
+- AuthApp
+
+<pre><code>
+package java_flow_control;
+
+public class AuthApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(args[0]);
+		
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "lk3374";
+		String inputPass = args[1];
+		
+		
+		System.out.println("Hi !");
+		
+		// if(inputId == id) {
+//		if(inputId.equals(id)) {
+//			if(inputPass.equals(pass)) {
+//				System.out.println("Master !!");
+//			} else {
+//				System.out.println("Wrong pass..");
+//			}
+//		} else {
+//			System.out.println("Who are you?");
+//		}
+		
+		if(inputId.equals(id) && inputPass.equals(pass)) {
+			System.out.println("Master !!");
+		} else {
+			System.out.println("Who are you??");
+		}
+		
+	}
+
+}
+</code></pre>
+
+- 산술 연산자
+
+  1 + 1 = 2 여기서 +은 산술연산자
+
+- 결합 연산자
+
+  “1” + “1” = “11” 여기서 +은 결합연산자 (문자열을 만들어내는 연산자)
+
+- primitive (데이터 타입)
+
+  원시라는 뜻으로, 더 이상 쪼갤 수 없는 데이터를 말한다
+
+	primitive = boolean, int, double, short, long, float, char
+
+	non primitive = String, Array, Date, File, Class ...
+
+- LogicalOperatorApp
+
+<pre><code>
+package java_flow_control;
+
+public class LogicalOperatorApp {
+
+	public static void main(String[] args) {
+		
+		// AND
+		System.out.println(1 == 1);
+		System.out.println(true && true); // true
+		// logical 연산자는 좌항과 우항 모두 boolean이 와야한다
+		System.out.println(true && false); // false
+		System.out.println(false && true); // false
+		System.out.println(false && false); // false
+		
+		// OR
+		System.out.println(true || true); // true
+		System.out.println(true || false); // true
+		System.out.println(false || true); // true
+		System.out.println(false || false); // false
+		
+		// NOT
+		System.out.println(!true); // false
+		System.out.println(!false); // true
+
+	}
+
+}
+</code></pre>
+
+- AuthApp2
+
+<pre><code>
+package java_flow_control;
+
+public class AuthApp2 {
+
+	public static void main(String[] args) {
+		
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "lk3374";
+		String pass2 = "lk5332";
+		String inputPass = args[1];
+		
+		
+		
+		System.out.println("Hi !");
+		
+		boolean isRight = (inputPass.equals(pass) || inputPass.equals(pass2));
+		
+		
+		if(inputId.equals(id) && isRight) {
+			System.out.println("Master !!");
+		} else {
+			System.out.println("Who are you??");
+		}
+		
+	}
+
+}
+</code></pre>
+
+- LoopApp
+
+<pre><code>
+package java_flow_control;
+
+public class LoopApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1);
+		
+		int i = 0; // 어떤 변수 이름을 써도 되지만, 반복문에서 카운팅하기 위해 i를 쓴다
+		while(i < 3) {
+			System.out.println(2);
+			System.out.println(3);
+			// i = i + 1;
+			i++;
+		}
+		
+		System.out.println("----------------------------------");
+		
+		// 괄호 안에는 boolean
+		// 디버거 F6번 사용 (다음줄 실행)
+		
+		// 몇번 반복해 ~ 라고 시킬 땐 for문이 더 좋다
+		// 괄호 안에 초깃값 설정, boolean, 반복이 실행될 때마다 +
+		for(int j = 0; j < 3; j++) {
+			System.out.println(2);
+			System.out.println(3);
+		}
+		// 무조건 한번은 실행된다
+		
+		System.out.println(4);
+
+	}
+
+}
+</code></pre>
+
+- ArrayApp
+
+<pre><code>
+package java_flow_control;
+
+public class ArrayApp {
+
+	public static void main(String[] args) {
+		
+		// egoing, jinhuck, youbin
+		// String users = "egoing, jinhuck, youbin";
+		String[] users = new String[3]; // 배열의 크기 3 (3칸짜리 캐비닛)
+		users[0] = "egoing";
+		users[1] = "jinhuck";
+		users[2] = "youbin";
+		// 문자열로 이루어져 있는 배열이라고 하는 데이터 타입을 값으로 하는 users라고 하는 변수를 만드는 것
+		
+		System.out.println(users[1]);
+		System.out.println(users.length); // 배열에 담겨있는 값이 3개다
+		// = 3칸짜리 배열이다
+		
+		// 배열을 생성할 때 값을 담아서 생성하는 방법
+		int[] score = {10, 100, 100};
+		System.out.println(score[0]);
+		System.out.println(score.length);
+		
+		// 0,1,2 -> index
+		// "egoing"... -> element, 원소
+
+	}
+
+}
+</code></pre>
+
+- LoopArray
+
+<pre><code>
+package java_flow_control;
+
+public class LoopArray {
+
+	public static void main(String[] args) {
+		
+		/*
+		 * <li>egoing</li>
+		 * <li>jinhuck</li>
+		 * <li>younin</li>
+		 */
+		
+		String[] users = new String[3]; 
+		users[0] = "egoing";
+		users[1] = "jinhuck";
+		users[2] = "youbin";
+		
+		for(int i = 0; i < 3; i++) {
+			System.out.println("<li> " + users[i] +" </li>");
+		}
+		
+		for(int i = 0; i < users.length; i++) {
+			System.out.println(users[i] +",");
+			if(i==2) {
+				System.out.println(users[i]);
+			}
+		}
+	}
+}
+</code></pre>
+
