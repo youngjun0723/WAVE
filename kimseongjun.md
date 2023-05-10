@@ -240,3 +240,352 @@ org.opentutorials.iot 패키지는 다시 lib 폴더 밖으로 꺼낸다.
 터미널에서 argument 주기
 - 실행할 클래스 파일 이름 다음에 연달아서 입력 -
 java OkJavaGoInHomeInput "JAVA APT 507" 15.0
+
+자바 문서 보는 법 - API VS UI//
+------------------------------------------
+API: 사용자가 직접 사용하는 것
+UI: 사용자가 자바 프로그램을 이용할 수 있도록 만들어 놓은 것
+
+자바 문서 보는 법 - 패키지, 클래스, 변수, 메소드//
+---------------------------------------------------------------
+클래스 : 서로 연관된 변수와 메소드로 모아서 이름을 붙히는 것 
+패키지 : 연관된 클래스를 묶어서 정리한 것 
+자바 문서 보는 법 - 클래스
+------------------------------------------
+클래스 ? 서로 연관된 변수와 메소드로 모아서 이름을 붙히는 것
+public class OKjavaGoInHome {
+
+    public static void main(String[]args){ // Math 클래스 : 수학과 관련된 여러 변수들과 메소드들이 있다.
+
+        System.out.println(Math.PI); // PI: 원주율이 적절한 정밀도로 저장되어 있는 변수
+        System.out.println(Math.floor(1.6)); // floor 메소드: 특정 소수점 이하에 대하여 버림한 값 산출
+        System.out.println(Math.ceil(1.6)); // ceil 메소드: 특정 소수점 이하에 대하여 올림한 값 산출
+    }
+
+}
+
+//자바 문서 보는 법 - 인스턴스
+------------------------------------
+인스턴스 ? 클래스를 컴퓨터 상에서 실체화한 것
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class InstanceApp {
+ 
+    public static void main(String[] args) throws IOException{
+         
+        PrintWriter p1 = new PrintWriter("result1.txt");
+        p1.write("Hello 1");
+        p1.close();
+         
+        PrintWriter p2 = new PrintWriter("result2.txt");
+        p2.write("Hello 2");
+        p2.close();
+
+    }
+
+}
+자바 문서 보는 법
+--------------------
+
+나의 앱 만들기
+=====================
+오리엔테이션
+---------------------
+'우리의 문제 현상은 무엇인가?'
+계산기로 하면 너무 손이 많이 감 !
+프로그램으로 하면 대기업을 위한 프로그램이라서 너무 복잡함 !
+-> 자바로 해결해보자 !
+'우선적으로 해야될 일은 현실을 분석하는 것'
+
+
+//나의 앱 만들기_기본 기능 구현
+-------------------------------
+public class AccountingApp{
+
+    public static void main(String{ args}){
+
+        System.out.println("Value of supply:" + 10000.0);
+        System.out.println("VAT:"(10000.0*0.1));
+        System.out.println("Total:"+(10000.0 + 10000.0*0.1));
+        System.out.println("Expense:"+(10000.0*0.3));
+        System.out.println("Income:"+(10000.0 - 10000.0*0.3));
+        System.out.println("Dividend 1:"+(10000.0 - 10000.0*0.3)*0.5);
+        System.out.println("Dividend 2:"+(10000.0 - 10000.0*0.3)*0.3);
+        System.out.println("Dividend 3:"+(10000.0 - 10000.0*0.3)*0.2);
+    }
+}
+//나의 앱 만들기-
+---------------------
+public class AccountingApp{
+
+    public static void main(String{ args}){
+
+        double valueOfSupply = 12345.0;
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+        double dividend1 = income * 0.5;
+        double dividend2 = income * 0.3;
+        double dividend3 = income * 0.2;
+
+
+        System.out.println("Value of supply:" + valueOfSupply);
+        System.out.println("VAT:"+ vat);
+        System.out.println("Total:"+ total);
+        System.out.println("Expense:"+ expense);
+        System.out.println("Income:"+ income);
+        System.out.println("Dividend 1:"+ dividend1);
+        System.out.println("Dividend 2:"+ dividend2);
+        System.out.println("Dividend 3:"+ dividend3);
+    }
+}
+
+//나의 앱 만들기
+----------------
+import javax.management.ValueExp;
+
+public class AccountingApp{
+
+    public static void main(String[]args){
+
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+        double dividend1 = income * 0.5;
+        double dividend2 = income * 0.3;
+        double dividend3 = income * 0.2;
+
+
+        System.out.println("Value of supply:" + valueOfSupply);
+        System.out.println("VAT:"+ vat);
+        System.out.println("Total:"+ total);
+        System.out.println("Expense:"+ expense);
+        System.out.println("Income:"+ income);
+        System.out.println("Dividend 1:"+ dividend1);
+        System.out.println("Dividend 2:"+ dividend2);
+        System.out.println("Dividend 3:"+ dividend3);
+    }
+}
+
+나의 앱 만들기_조건문
+------------------------
+> 조건문 : 비슷한 프로그램 두가지를 하나로 합칠 때 유용하게 쓰인다.
+public class AccountingIFApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+         
+        double dividend1;
+        double dividend2;
+        double dividend3;
+         
+        if(income > 10000.0) {
+            dividend1 = income * 0.5;
+            dividend2 = income * 0.3;
+            dividend3 = income * 0.2;
+        } else {
+            dividend1 = income * 1.0;
+            dividend2 = income * 0;
+            dividend3 = income * 0;
+        }
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+ 
+    }
+ 
+}
+나의 앱 만들기 - 배열 
+----------------------
+> 배열 : 비슷한 종류의 정보를 정리하기 위한 것
+
+
+public class AccountingArrayApp {
+
+  public static void main(String[] args) {
+
+    double valueOfSupply = Double.parseDouble(args[0]);
+    double vatRate = 0.1;
+    double expenseRate = 0.3;
+    double vat = valueOfSupply * vatRate;
+    double total = valueOfSupply + vat;
+    double expense = valueOfSupply * expenseRate;
+    double income = valueOfSupply - expense;
+
+    double[] dividendRates = new double[3];
+    dividendRates[0] = 0.5;
+    dividendRates[1] = 0.3;
+    dividendRates[2] = 0.2;
+> 배열은 데이터 타입 옆에 대괄호[]를 붙여서 표현, 인스턴스를 만들 때는 배열의 길이를 지정하여 생성
+    double dividend1 = income * dividendRates[0]; 
+    double dividend2 = income * dividendRates[1];
+    double dividend3 = income * dividendRates[2];
+
+    System.out.println("Value of supply : " + valueOfSupply);
+    System.out.println("VAT : " + vat);
+    System.out.println("Total : " + total);
+    System.out.println("Expense : " + expense);
+    System.out.println("Income : " + income);
+    System.out.println("Dividend 1 : " + dividend1);
+    System.out.println("Dividend 2 : " + dividend2);
+    System.out.println("Dividend 3 : " + dividend3);
+
+  }
+
+}
+나의 앱 만들기 - 반복문
+-----------------------
+> while 문 : 괄호 안의 조건이 참인 한 블록 내의 작업을 게속 반복
+> 
+public class AccountingArrayApp {
+
+  public static void main(String[] args) {
+
+    double valueOfSupply = Double.parseDouble(args[0]);
+    double vatRate = 0.1;
+    double expenseRate = 0.3;
+    double vat = valueOfSupply * vatRate;
+    double total = valueOfSupply + vat;
+    double expense = valueOfSupply * expenseRate;
+    double income = valueOfSupply - expense;
+
+    double[] dividendRates = new double[3];
+    dividendRates[0] = 0.5;
+    dividendRates[1] = 0.3;
+    dividendRates[2] = 0.2;
+
+    double dividend1 = income * dividendRates[0];
+    double dividend2 = income * dividendRates[1];
+    double dividend3 = income * dividendRates[2];
+
+    System.out.println("Value of supply : " + valueOfSupply);
+    System.out.println("VAT : " + vat);
+    System.out.println("Total : " + total);
+    System.out.println("Expense : " + expense);
+    System.out.println("Income : " + income);
+
+    double[] dividendRates = new double[3];
+    dividendRates[0] = 0.5;
+    dividendRates[1] = 0.3;
+    dividendRates[2] = 0.2;
+
+    int i = 0;
+    while (i < dividendRates.length) {
+      System.out.println("Diviidend:" + (income * dividendRates[i]));
+      i = i + 1;
+    }
+
+  }
+
+}
+> while 문을 이용하여 반복적으로 동작하던 작업을 간결하게 바꿀 수 있다 !!
+        ....
+
+        double dividend1 = income * dividendRates[0];
+        double dividend2 = income * dividendRates[1];
+        double dividend3 = income * dividendRates[2];
+
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+
+        ....
+
+        double[] dividendRates = new double[3];
+        dividendRates[0] = 0.5;
+        dividendRates[1] = 0.3;
+        dividendRates[2] = 0.2;
+        
+        int i = 0;
+        while (i < dividendRates.length) {
+            System.out.println("Dividend : " + income * dividendRates[i]);
+            i = i + 1;
+        }
+나의 앱 만들기 - 메소드
+------------------------
+> 메소드 : 클래스의 동작을 나타내는 함수
+> Math의 floor, ceil
+> PrintWriter의 write, close 등의 메소드
+
+public class AccountingMethodApp {
+    public static double valueOfSupply;
+    public static double vatRate;
+    public static double expenseRate;
+    public static void main(String[] args) {
+        valueOfSupply = 10000.0;
+        vatRate = 0.1;
+        expenseRate = 0.3;
+        print();
+    }
+ 
+    public static void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public static double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public static double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public static double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public static double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public static double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+ 
+}
+# result
+> Value of supply : 10000.0
+VAT : 1000.0
+Total : 11000.0
+Expense : 3000.0
+Income : 7000.0
+Dividend 1 : 3500.0
+Dividend 2 : 2100.0
+Dividend 3 : 1400.0
+
+나의 앱 만들기 - 클래스 
+-----------------------
