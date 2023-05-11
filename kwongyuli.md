@@ -1200,3 +1200,281 @@ public class LoopArray {
 }
 </code></pre>
 
+***
+
+2023-05-11 8일차 스터디
+-------------
+
+- AuthApp3
+
+<pre><code>
+package java_flow_control;
+
+public class AuthApp3 {
+
+	public static void main(String[] args) {
+		
+		// String[] users = {"egoing", "jinhuck", "youbin"};
+		String[][] users = {
+				{"egoing", "1111"},
+				{"jinhuck", "2222"},
+				{"youbin", "3333"}
+		}; // 각각의 원소가 배열이고, 그 배열의 값이 String인 데이터를 만든 것이다
+		
+		String inputId = args[0];
+		String inputpass = args[1];
+		
+		boolean isLogined = false;
+		for(int i=0; i<; i++) {
+			String[] current = users[i];
+			if(current[0].equals(inputId) && current[1].equals(inputpass)) {
+				isLogined = true;
+				break;
+			}
+		}
+		
+		System.out.println("Hi !!");
+		if(isLogined) {
+			System.out.println("Master ~~");
+		} else {
+			System.out.println("Who are you?");
+		}
+
+	}
+
+}
+</code></pre>
+
+- FirstMethod
+
+<pre><code>
+public class FirstMethod {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Hello Method"); // println도 method
+		System.out.println(Math.floor(1.1)); // 1.0
+
+	} 
+	// main이라는 method
+	// 자바 애플리케이션을 만들 때는 class를 만들어야 하고
+	// class를 실행시킬 때는 반드시 약속된 이름인 main이라고 하는 특수한 이름의 method를 정의해 놓으면
+	// first method를 실행해주라는 명령을 받으면 main이라는 method를 실행하도록 약속되어 있다
+
+}
+</code></pre>
+
+- WhyMethod
+
+<pre><code>
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WhyMethod {
+	
+	public static void main(String[] args) throws IOException {
+		// main은 method이고 얘는 약속이고, 얘가 있어야 자바는 main을 호출해 프로그램을 실행시킨다
+		// String[]은 서로 연관된 문자열을 그룹핑하는 문자열 배열이다
+		// args는 main이라고 하는 method를 자바가 실행할 때 입력해주는 입력값이 args를 통해 들어온다
+		
+		printTwoTimes("a", "-");
+		printTwoTimes("b", "*");
+		// 한줄짜리더라도 메소드를 만드는 것은 좋은 습관이다
+		// a, b
+		// 함수 안으로 주입한 구체적인 값
+		// = 인자 = argument
+		System.out.println(twoTimes("a", "-"));
+		FileWriter fw = new FileWriter("out.txt");
+		fw.write(twoTimes("a", "*"));
+		fw.close();
+		// Email.send("egoing@a.com", "two times a", "twoTimes("a", "$"));
+
+	}
+
+	public static void printTwoTimes(String text, String delimiter) {
+		
+		System.out.println(delimiter);
+		System.out.println(text);
+		System.out.println(text);
+		
+	}
+	// 코드 우클릭 Refactor -> Extract Method...
+	// 메소드의 괄호 안에 들어오는 첫번째 값은 반드시 String
+	// 그리고 그렇게 들어온 값은 이 중괄호 안에서 text라는 이름의 변수의 값이 된다 
+	
+	// text, delimiter
+	// 이러한 변수들은 메소드 밖에서 메소드를 사용하는 쪽에서 주입한 값을 메소드 안으로 흘려보내주는 매개자다
+	// = 매개변수 = parameter
+	
+	public static String twoTimes(String text, String delimiter) {
+		String out = "";
+		out = out + delimiter + "\n";
+		out = out + text + "\n";
+		return out;
+	} // 화면에 출력하는 기능을 빼버리고 return 값을 가지고 있기 때문에 활용도가 높다
+
+}
+</code></pre>
+
+- OutputMethod
+
+<pre><code>
+public class OutputMethod {
+	
+	public static String a() {
+		// ...
+		return "a";
+		// return을 쓰게되면 a라는 method는 return 뒤의 값이 된다
+		// 그때 return할 값의 데이터 타입이 문자열이면 void가 아니라 String을 써야한다
+		// a라는 method는 output이 String이다
+	}
+	
+	public static int one() {
+		// ...
+		return 1;
+	}
+	// method의 output!
+	// 그 method의 return 값 뒤에 있는 값이 method의 실행 결과가 된다
+	// 그리고 return 값은 그 method를 종료시키는 역할도 한다
+	// method는 그 method return 값이 어떤 데이터 타입인지 정의해줘야 한다
+	// void는 return 값이 없는 method이다
+
+	public static void main(String[] args) {
+		
+		System.out.println(a());
+		System.out.println(one());
+
+	}
+
+}
+</code></pre>
+
+- 객체 지향 프로그래밍 (Object Oriented Programming)
+
+  서로 연관된 메소드와 변수를 그룹핑 해서 이름을 붙인 것 = class
+
+	class를 복제해서 서로 다른 내부적인 상태를 갖고있는 복제본들 = instance
+
+	class와 instance를 포괄적으로 객체라고 생각하기
+
+	이 객체를 뼈대로 하는 프로그램을 만들어가는 프로그래밍 방법론을 OOP
+
+- static
+
+  static이라는 키워드가 붙은 method는 class의 method이다
+
+	static이 없는 method는 instance의 method다
+
+- AccountingApp
+
+<pre><code>
+public class AccountingApp {
+	
+	// 공급가액
+	public static double valueOfSupply = 10000.0; // 전역변수
+			
+	// 부가가치세율
+	public static double vatRate = 0.1; // 전역변수
+	
+	public static double getVAT() {
+		return valueOfSupply * vatRate;
+	}
+	
+	public static double getTotal() {
+		return valueOfSupply + getVAT();
+	}
+	
+
+	public static void main(String[] args) {
+		
+		// 부가세
+		//double vat = valueOfSupply * vatRate;
+		// double vat = getVAT();
+		// 합계
+		// double total = valueOfSupply + vat;
+		// double total = getTotal();
+		
+		System.out.println("Vaule of supply :" +valueOfSupply);
+		System.out.println("VAT : "+getVAT());
+		System.out.println("Total : " +getTotal());
+
+	}
+
+}
+</code></pre>
+
+- AccessLevelModifiersMethod
+
+<pre><code>
+class Greeting{
+	public static void hi() {
+		System.out.println("Hi");
+	}
+} // 다른 class 안에 소속된 method
+
+public class AccessLevelModifiersMethod {
+	// public에는 다른 값이 올수도 있다
+	// public protected, default(생략), private
+	
+	// private = 같은 class 안에서만 사용할 수 있다
+
+	public static void main(String[] args) {
+		
+		Greeting.hi();
+
+	}
+
+}
+</code></pre>
+
+- staticMethod
+
+<pre><code>
+class Print{
+	public String delimiter;
+	public void a() {
+		System.out.println(this.delimiter);
+		System.out.println("a");
+		System.out.println("a");
+	}
+	
+	public void b() {
+		System.out.println(this.delimiter);
+		System.out.println("b");
+		System.out.println("b");
+	}
+	// this.delimiter은 t1 인스턴스의 변수의 값으로 지정한 "-"
+	
+	public static void c(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("c");
+		System.out.println("c");
+	}
+}
+
+public class staticMethod {
+
+	public static void main(String[] args) {
+//		Print.a("-");
+//		Print.b("-");
+		// 여기 a,b는 class은 Print 소속으로 실행되는 것
+		// 하지만 method가 class의 소속일 때는 static이 있어야 한다
+		
+		// 분신이 아니라 instance
+		Print t1 = new Print(); // 데이터타입이 Print인 변수에 담았다, t1은 Print class의 분신
+		t1.delimiter = "-"; // t1이라고 하는 Print의 분신은 내부적으로 구분자의 값이 -가 된다
+		t1.a(); // 구분자를 추가하지 않아도 똑같은 동작이 된다
+		t1.b();
+		// a와 b는 t1이라는 instance 소속으로 실행되는 것
+		// method가 instance 소속일 때는 static을 빼줘야 한다
+		// t1 instance는 내부적으로 delimiter라고 하는 변수의 값을 공유하고 있다
+		Print.c("$");
+		
+//		Print.a("*");
+//		Print.b("*");
+		// 이 두가지는 성격이 비슷하기 때문에 이 method들을 그룹핑하는 정리정돈의 도구 class를 이용
+	}
+
+}
+</code></pre>
+
