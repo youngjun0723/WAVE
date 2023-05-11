@@ -421,6 +421,7 @@ floor 메소드는 특정 소수점 이하에 대해서 버림한 값을 산출�
 
 ceil 메소드는 특정 소수점 이하에 대해서 올림한 값을 산출한다.
 
+	
 - 인스턴스
 
 <pre><code>
@@ -464,3 +465,60 @@ java.lang.Object			 // 베이스
 // 자식은 부모의 메소드를 사용가능 (상위 개체의 정보를 물려받음)
 // Writer 에도 write 기능이 있고 PrintWriter 에도 write 기능이 있을때 PrintWriter 의 write 기능을 사용하는 것을 override 라고 함
 	</code></pre>
+
+# 나의 앱 만들기 (자바1 - 14과)
+
+- 공급가, 부가가치세, 비용, 이익, 배당을 자동으로 계산해주는 나만의 앱 만들기
+
+<pre><code>
+public class AccountingApp {
+    public static void main(String[]args){
+
+        System.out.println("공급가 : "+ 10000.0);
+        System.out.println("부가가치세 :"+ (10000.0*0.1));
+        System.out.println("총합 : "+ (10000.0 + 10000.0*0.1));
+        System.out.println("비용 : "+ (10000.0*0.3));
+        System.out.println("이익 : "+ (10000.0 - 10000.0*0.3));
+        System.out.println("배분 1 : "+ (10000.0 - 10000.0*0.3) * 0.5);
+        System.out.println("배분 2 : "+ (10000.0 - 10000.0*0.3) * 0.3);
+        System.out.println("배분 3 : "+ (10000.0 - 10000.0*0.3) * 0.2);
+    }
+}
+</code></pre>
+
+- 변수도입
+
+<pre><code>
+public class AccountingApp {
+    public static void main(String[]args){
+        double ValueofSupply = 10000.0;
+		// double ValueofSupply = Double.parseDouble(args[0]);
+		// ValueofSupply가 아규먼트를 받게함
+        double VATrate = 0.1;
+        double ExpenseRate = 0.3;
+        double VAT = ValueofSupply * VATrate;
+        double Expense = ValueofSupply * ExpenseRate;
+        double Income = ValueofSupply - Expense;
+        double Dividend 1 = Income * 0.5;
+        double Dividend 2 = Income * 0.3;
+        double Dividend 3 = Income * 0.2;
+
+        // 계산식과 값들을 변수로 바꾸어줌
+
+		// Alt + Ctrl + V  변수지정 단축키 
+		// Ctrl + R 	   찾아서 바꾸기
+
+        System.out.println("Value of supply : "+ ValueofSupply);
+        System.out.println("VAT :"+ VAT);
+        System.out.println("Total : "+ (ValueofSupply + VAT));
+        System.out.println("Expense : "+ Expense);
+        System.out.println("Income : "+ Income);
+        System.out.println("Dividend 1 : "+ Dividend 1);
+        System.out.println("Dividend 2 : "+ Dividend 2);
+        System.out.println("Dividend 3 : "+ Dividend 3);
+
+		
+    }
+}
+</code></pre>
+
