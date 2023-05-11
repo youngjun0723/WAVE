@@ -9,7 +9,7 @@
 public class @@@
     pulic static void main(String[] args){
 
-    System.out.println("@@@@")
+    System.out.println("aaaa")
 
     }
 
@@ -286,7 +286,7 @@ roomLamp.on();
 JOptionPane 객체의 showInputDialog 메소드를 이용하여 id값을 사용자가 입력하게 할 수 있다
 JOptionPane 객체를 이용하기 위해서 import 구문을 사용함
 
-
+<pre><code>
 import javax.swing.JOptionPane;
 
 import org.opentutorials.iot.DimmingLights;
@@ -320,7 +320,7 @@ public class OKjavaGoInHomeInput {
         moodLamp.on(); 
     }
 }
-
+</code></pre>
 
 아규먼트를 이용해 프로그램 실행시키기
 
@@ -378,3 +378,89 @@ java -cp ".;@@" aa
 javac @@.jave // 컴파일시킴
 java @@ "aa" 11  // 아규먼트 값은 클래스 파일 실행 명령어 이후 바로 적어서 값을 설정 가능하다
 
+
+___
+0508
+
+# 자바문서 보는법 (자바1 - 13과)
+
+- API 와 UI 의 차이점
+
+	작업들의 시간적 순서에 주목 -> 프로그램
+
+	도구의 응용에 주목 -> 애플리케이션
+
+	- 자바의 도구들을 응용해서 사용하기 위해서 일정한 조작 장치를 구성한 것을  __자바 API__ 라고 한다.
+
+	- 사용자가 자바 프로그램을 사용할 수 있도록 만들어둔 장치들을 __UI__ 라고 한다.
+
+- Java API documentation 사용법
+
+	패키지와 클래스를 찾아볼 수 있고 자신이 찾은 클래스가 어떤 패키지에 속해있는지 알 수 있다.
+
+	 패키지 > 클래스 > 변수, 메소드
+
+- 클래스에 대하여
+
+<pre><code>
+public class ClassApp {
+	public static void main(String[] args) {
+		
+		System.out.println(Math.PI);  // PI 변수를 이용해 파이값을 나타냄
+		System.out.println(Math.floor(1.6));  // 1.6 이라는 실수를 floor 를 사용해 소수점 이하에 대해서 날린 값을 출력함 
+		System.out.println(Math.ceil(1.6));   // 1.6 이라는 실수를 ceil 을 사용해 소수점 이하에 대해서 올림한 값을 출력함
+	}
+}
+</code></pre>
+	 
+Math 클래스에는 수학과 관련된 여러 변수들과 메소드들이 있다.
+
+PI 변수는 원주율이 적절한 정밀도로 저장되어 있는 변수다.
+
+floor 메소드는 특정 소수점 이하에 대해서 버림한 값을 산출한다.
+
+ceil 메소드는 특정 소수점 이하에 대해서 올림한 값을 산출한다.
+
+- 인스턴스
+
+<pre><code>
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;  //  java.io 패키지에서 불러옴
+public class InstanceApp {
+
+	public static void main(String[] args) throws IOException {
+		
+		PrintWriter p1 = new PrintWriter("result1.txt");  
+		// PrintWriter 객체는 math 클래스와 다르게 new 키워드를 통한 인스턴스를 생성한다.
+		// PrintWriter 클래스의 이름을 p1으로 설정함.
+		
+		p1.write("Hello 1");
+		p1.close();	
+		
+		PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		p2.toString();
+
+		// 간단하게 끝나는 작업이면 평범하게 하면 되지만 작업량이 많아지고 긴 맥락일시 인스턴스를 사용하는것이 더욱 효율적이다.
+		// 생성자(Constructors)가 없으면 1회용 이다. (math)
+		// 생성자가 있으면 생성자를 이용해 인스턴스를 만드는 것이 허용 되어있다.
+
+		// Add throws declaration을 이용해서 에러 핸들링을 할 수 있다.
+	}
+
+}
+
+</code></pre>
+
+- 상속
+
+<pre><code>
+java.lang.Object			 // 베이스
+	java.io.Writer  		 // Object 에게 상속받음
+		jave.io.PrintWriter  // Writer 에게 상속받음
+
+// 자식은 부모의 메소드를 사용가능 (상위 개체의 정보를 물려받음)
+// Writer 에도 write 기능이 있고 PrintWriter 에도 write 기능이 있을때 PrintWriter 의 write 기능을 사용하는 것을 override 라고 함
+	</code></pre>
