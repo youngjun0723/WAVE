@@ -976,5 +976,5 @@ public class AccesLevelModifierMethod {
 
 }
 //private는 클래스 내부에서만 사용가능하다.
-//public은 클래스 외부에서도 사용이 가능하다.
+//public은 클래스 외부에서도 사용이 가능하다.1
 
