@@ -943,6 +943,322 @@ public class ArrayApp {
  
 }
  
-=======
------------------------
->>>>>>> 881d7c444e50d32fc2984bfcebb7c3d7c00cf598
+종합 응용 
+---------------------------
+>> 이전에 사용했던 java 제어문 배열 + 반복문 + 조건문을 이용해서 로그인 프로그램을 확장시켜 보았다.
+public class AuthApp3 {
+
+    public static void main(String[] args) {
+
+        String[] users = { "egoing", "jinhuck", "youbin" };
+        String inputId = args[0];
+
+        boolean isLogined = false;
+        for (int i = 0; i < users.length; i++) {
+            String currentId = users[i];
+            if (currentId.equals(inputId)) {
+                isLogined = true;
+                break; 
+            }
+        }
+        System.out.println("Hi,");
+        if (isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+
+    }
+
+}
+>break: 더 이상 현재 반복문을 진행하기 않고 빠져나오게 하는 구문
+
+>>이차원 배열
+public class AuthApp4 {
+
+    public static void main(String[] args) {
+
+        // String[] users = {"egoing", "jinhuck", "youbin"};
+        String[][] users = {
+                { "egoing", "1111" },
+                { "jinhuck", "2222" },
+                { "youbin", "3333" }
+        };
+        String inputId = args[0];
+        String inputPass = args[1];
+
+        boolean isLogined = false;
+        for (int i = 0; i < users.length; i++) {
+            String[] current = users[i];
+            if (current[0].equals(inputId) &&
+                    current[1].equals(inputPass)) {
+                isLogined = true;
+                break;
+            }
+        }
+        System.out.println("Hi,");
+        if (isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+
+    }
+>> 터미널에서 javac AuthApp4.java 입력하고, java AuthApp4 [user] [비밀번호] 올바르게 입력하면 Hi, Master가 나오고, 아니면 who are you가 나오는 구문이다.
+}
+=========================
+java 메소드
+=========================
+>메소드: 클래스와 관련된 작업을 하는 함수
+>메소드에 대한 예제 : floor 메소드
+public class FirstMethod {
+ 
+    public static void main(String[] args) {
+         
+        System.out.println("Hello Method");
+        System.out.println(Math.floor(1.1)); 
+ >> floor 메소드는 double 형 자료형을 받아서 내림 연산을 수행하여 double 형으로 반환
+    }
+메소드의 기본 형식
+---------------------
+>1억줄 이상의 코드가 있는 상황, 메소드를 이용해서 같은 코드 재사용, 유지보수를 쉽게 할 수 있다!!
+}
+public class WhyMethod {
+     
+    public static void main(String[] args) {
+         
+        // 100000000
+        printTwoTimesA();
+        // 100000000
+        printTwoTimesA();
+        // 100000000
+        printTwoTimesA();
+ 
+    }
+ 
+    public static void printTwoTimesA() {
+        System.out.println("-");
+        System.out.println("a");
+        System.out.println("a");
+    }
+ 
+}
+> 이클립스에서 Refactor라는 기능 -> 메소스 추출을 빠르게 할 수 있도록 도와줌
+> 메소드 추출을 원하는 부분을 블록으로 지정하여 우클릭 후 Refactor -> Extract Method
+> 메소드 이름 입력, priview를 누르면 미리 바뀔 모습을 확인 가능
+> ok버튼을 눌러서 메소드를 추출할 수 있음
+ 
+메소드의 입력
+--------------------
+>매개변수는 메소드 안에서 통용되는 변수, 메소드를 호출할 때는 실제 데이터를 메소드의 파라미터 안에 넣게 되는데 이를 인자(아규먼트)라고 함
+public class WhyMethod {
+     
+    public static void main(String[] args) { //main 메소드는 문자열 배열인 args 파라미터 이용
+         
+                         //인자, argument
+            printTwoTimes("a", "-");
+            // 100000000
+            printTwoTimes("a", "*");
+            // 100000000
+            printTwoTimes("a", "&");
+            printTwoTimes("b", "!");
+ 
+    }
+                                     //매개변수,parameter 
+    public static void printTwoTimes(String text, String delimiter) {
+        System.out.println(delimiter);
+        System.out.println(text);
+        System.out.println(text);
+    }
+ 
+}
+# result
+*
+a
+a
+&
+a
+a
+!
+b
+b
+
+메소드의 출력
+--------------------
+public class OutputMethod {
+     
+    public static String a() {
+        // ... 
+        return "a";
+    }
+     
+    public static int one() {
+        return 1;
+        //...
+    }
+ 
+    public static void main(String[] args) {
+ 
+        System.out.println(a());
+        System.out.println(one());
+         
+    }
+> 메소드가 데이터를 변환하도록 만들기 위해 구성 요소들이 필요하다.
+>> 반환되는 데이터의 타입, return
+>메소드가 반환하지 않는다면 void를 넣는다.
+'return 반환값' 형식으로 입력하여 메소드가 데이터를 반환하도록 한다.
+그리고 return이 실행된 후에는 그 뒤에 실행할 코드가 메소드에 남아 있어도 더 처리하지 않고 바로 메소드를 빠져 나오도록 함
+}
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WhyMethod {
+
+	public static void main(String[] args) throws IOException {
+		String out = twoTimes("a", "-");
+		System.out.println(out);
+		FileWriter fw = new FileWriter("out.txt");
+		fw.write(out);
+		fw.close();
+		System.out.println(twoTimes("a", "*"));
+	}
+	public static String twoTimes(String text, String delimiter) {
+		String out = "";
+		out = out + delimiter + "\n";
+		out = out + text + "\n";
+		out = out + text + "\n";
+		return out;
+	}
+}
+메소드의 활용
+------------------
+> 이전 쉽게 배우는 자바 14-1 AccountingApp 코드 참조
+>> 1
+public class AccountingApp { 
+
+	public static void main(String[] args) {
+		double valueOfSupply = 10000.0;
+		double vatRate = 0.1;
+		double vat = valueOfSupply * vatRate;
+		double total = valueOfSupply + vat;
+		
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+	}
+
+}
+# result
+Value of supply : 10000.0
+VAT : 1000.0
+Total : 11000.0
+>> 여기서 부가가치세와 총 가격을 구하는 부분을 메소드로 추출해서 만들어보자.
+>> 2
+public class AccountingApp {
+	// 공급가액
+	public static double valueOfSupply = 10000.0;
+	// 부가가치세율
+	public static double vatRate = 0.1;
+
+	public static double getVAT(){
+		return valueOfSupply*vatRate;
+	}
+
+	public static double getTotal(){
+		return valueOfSupply + getVAT();
+	}
+
+	public static void main(String[] args){
+		System.out.println("Value of supply:"+valueOfSupply);
+		System.out.println("VAT:"+getVAT());
+		System.out.println("Total:"+getTotal());
+
+   }
+
+}
+# result
+Value of supply:10000.0
+VAT:1000.0
+Total:11000.0
+> 공급가와 부가가치세율은 모든 메소드에서 바로 접근할 수 있게 클래스의 static 필드로 빼내었다. 이렇게 메소드를 이용해서 만든 코드는 재사용성이 휠씬 높아진다 !
+>>> (1번 코드랑 2번 코드 결과값은 같음)
+부록 (access level modifiers, static)
+-----------------------------
+
+접근 제어 
+--------------
+>> public ? ?
+> 동작을 제어하기 위해서 바깥으로 드러나서 호출할 수 있는 것들을 위해 지정함
+>> private ? ?
+> 외부에서 굳이 알 필요도 없거나 알아서는 안되는 것들을 위해서 지정함
+public class AccessLevelModifiersMethod {
+
+	private static void hi() {
+		System.out.println("Hi");
+	}
+	public static void main(String[] args) {
+		hi();
+	}
+# result
+Hi
+}
+
+(static)
+------------
+>> 클래스 ? ?
+>일종의 형들
+>> 인스턴스 ? ?
+>그 형들로 찍어서 만든 실체
+
+static 메소드는 클래스의 메소드로, 
+프로그램에서 한번만 정의됩니다. 즉 여러 개 가질 수 없는 유일무이한 메소드이다.
+반면 static이 아닌 메소드는 인스턴스의 메소드로, 
+프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드이다.
+
+class Print{
+    public String delimiter;
+    public void a() {
+        System.out.println(this.delimiter);
+        System.out.println("a");
+        System.out.println("a");
+    }
+    public void b() {
+        System.out.println(this.delimiter);
+        System.out.println("b");
+        System.out.println("b");
+         
+    }
+    public static void c(String delimiter) {
+        System.out.println(delimiter);
+        System.out.println("b");
+        System.out.println("b");
+    }
+}
+public class staticMethod {
+     
+    public static void main(String[] args) {
+//      Print.a("-");
+//      Print.b("-");
+         
+        // instance
+        Print t1 = new Print();
+        t1.delimiter = "-";
+        t1.a();
+        t1.b();
+        Print.c("$");
+         
+         
+//      Print.a("*");
+//      Print.b("*");
+         
+        Print t2 = new Print();
+        t2.delimiter = "*";
+        t2.a();
+        t2.b();
+    }
+     
+ 
+}
+>> static 메소드는 클래스의 메소드로 프로그램에서 한번만 정의된다. 즉 여러 개 가잘 수 없는 유일무히한 메소드
+>> static이 아닌 메소드는 인스턴스의 메소드로 프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드
