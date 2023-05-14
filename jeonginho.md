@@ -1416,3 +1416,175 @@ public class staticMethod {
 -------------
 
 <hr/>
+
+< 2023-05-12 / JAVA 2 / 객체지향 프로그래밍 1 ~ 5 >
+-------------
+
+* 메소드와 절차적 프로그래밍
+-메소드는 언어마다 메소드, 함수, 서브루틴, 프로시저라는 이름으로 불림.   
+-이러한 메소드를 중심으로 프로그램을 만들어 나가는 프로그래밍을 절차적 프로그래밍이라고 함.   
+-대표적 언어 : C언어   
+
+* 클래스와 객체지향 프로그래밍
+-객체지향 프로그래밍 : 변수와 메소드를 모은 수납상자와 같은 클래스를 이용하여 프로그램을 정돈시켜 프로그램의 구조를 만들어 가는 방식.   
+-객체 지향 언어 : 위와 같은 방식은 언어차원에서 지원하는 프로그래밍 언어.   
+
+* 남의 클래스, 남의 인스턴스
+<pre><code>
+import java.io.FileWriter;
+import java.io.IOException;
+ 
+public class OthersOOP {
+ 
+    public static void main(String[] args) throws IOException {
+        // class : System, Math, FileWriter
+        // instance : f1, f2
+         
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.8));
+        System.out.println(Math.ceil(1.8));
+         
+        FileWriter f1 = new FileWriter("data.txt");
+        f1.write("Hello");
+        f1.write(" Java");
+         
+         
+        FileWriter f2 = new FileWriter("data2.txt");
+        f2.write("Hello");
+        f2.write(" Java2");
+        f2.close();
+         
+        f1.write("!!!");
+        f1.close();
+    }
+}
+</code></pre>
+-Math Class : 수학적 계산을 도와주는 여러 메소드를 포함.   
+=> floor, ceil 메소드, 클래스 변수(PI)   
+=> 자연상수 E, 삼각함수, 제곱, 로그, 절대값, 난수, 반올림 등의 기능들을 할 수 있는 여러 메소드와 변수 포함.   
+=> 이러한 메소드와 변수는 인스턴스를 생성하지 않아도 클래스에서 직접 호출할 수 있다.   
+-FileWriter class : 파일을 열고 원하는 내용을 입력할 수 있는 기능 제공.   
+=> 각각의 파일에 해당하는 인스턴스를 생성하여 Write 메소드로 쓰기 작업을 수행하고 close 메소드로 파일을 닫는다.   
+=> 이러한 메소드와 변수는 인스턴스를 생성하여 사용하여야 하고 클래스에서 직접 호출할 수 없다.   
+
+* 변수와 메소드
+<pre><code>
+public class MyOOP {
+
+	public static void main(String[] args) {
+		String delimiter = "----";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+		
+		delimiter = "****";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+	}
+
+	public static void printA(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+</code></pre>
+-위 코드에서 String delimiter는 변수의 인자값을 바꾸는 변수선언이다.   
+-메소드 안에서 정의된 변수는 메소드안에서만 사용할 수 있다.   
+-이때 print 소속의 변수를 선언하면 아래 코드와 같다.
+<pre><code>
+class Print {
+	public static String delimiter = "";
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+	public static void printAll() {
+		printA();
+		printA();
+		printB();
+		printB();
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+		Print.printAll();
+		
+		Print.delimiter = "****";
+		Print.printAll();
+	}	
+}
+</code></pre>
+
+* 클래스의 존재 이유와 기본형식
+-클래스의 장점 : 관련있는 변수들과 메소드를 묶어서 정리정돈을 할 수 있게 한다.   
+-우리는 위 코드에서  PrintA(), PrintB() 식으로 프린트문을 실행했다. 이를 더 편하게 하려면 Print.A, Print.B 이런식으로 변경해주면 된다. 이는 Print에 속한 A라는 뜻이다.
+=> Print.A 처럼 쓰면 굳이 메소드의 이름을 PrintA라고 적지 않고 A라고만 적어도 Print 객체의 A메소드이기 때문에 A를 출력한다는 의미를 쉽게 유추할 수 있다.   
+
+* 클래스의 형식
+-클래스는 한파일에 여러 개를 넣을 수 있지만 접근제어자 Public은 Java 파일과 같은 이름의 클래스에 하나만 붙일 수 있다.   
+-소스 코드를 컴파일할 때 그 안에 들어 있는 클래스는 아래와 같이 따로따로 하나씩 class 파일로 만들어진다.   
+<pre><code>
+    MyOOP.class // 실행을 담당하는 main 메소드가 들어있는 MyOOP.class
+    Print.class // 프로그램의 실질적인 액션을 담당하는 Print.class
+(폴더)src
+    MYOOP.java
+</code></pre>
+-따라서 한 파일안에 여러 클래스가 등장할 수 있지만 여러 클래스를 각각 하나의 java 파일로 만들게 되면 프로그램 기능별로 쪼개어 소스 코드를 별도 저장할 수 있다.   
+
+* 인스턴스
+-클래스 : 어떠한 형틀.   
+-인스턴스 : 형틀로 찍어낸 실체.   
+-객체를 인스턴스로 만들면 그 인스턴스를 바꾼다 하더라도 다른 인스턴스는 영향을 받지 않는다.   
+-클래스를 복제하는 키워드 : "new"   
+<pre><code>
+class Print {
+	public String delimiter = "";
+	public void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print p1 = new Print();
+		p1.delimiter = "----";
+		Print p2 = new Print();
+		p2.delimiter = "****";
+		
+		p1.A();
+		p2.A();
+		p1.B();
+		p2.B();	
+	}	
+}
+</code></pre>
+-위 코드에서 A()와 B() 속에 있는 코드를 실행시킬려면, MyOOP 클래스의 main에서 Print 클래스를 객체화 시켜 p1,p2이라는 변수를 선언하고 이를 "new" 를 사용해 Print()를 복제한 복제본을 만들어서 각각의 복제본을 내부적으로 다른데이터(딜리버리)를 유지하게 하여 코드를 깔끔하고 중복을 제거하는 결과를 얻게되었다.   
+
+< 2023-05-12 / JAVA 2 / 객체지향 프로그래밍 1 ~ 5 END >
+-------------
+
+<hr/>
