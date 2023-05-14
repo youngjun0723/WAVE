@@ -351,3 +351,311 @@ args는 문자열 배열로 여러개의 String 데이터가 들어있을 수 �
 
 ===============================================
 
+2023-05-08
+-------------
+
+* API(Application Programming Interface)
+
+  자바 프로그램을 만들고 사용할 때의 단계 -> Computer - OS - Java - (API)Java Program...
+
+  Application - 도구(System, Date, Math..)의 응용에 주목
+
+  Program - 작업들의 시간적 순서에 주목
+
+  자바 프로그램은 또 다른 자바 프로그램에서 사용될 수도 있고, 다른 프로그램에서 사용할 수 있도록 만들어둔 장치 역시 API이다.
+
+* UI(User Interface)
+  사용자가 우리가 만든 프로그램을 사용할 수 있도록 만들어둔 장치
+
+* 자바 - 문서
+  메소드(Method), 변수(Variable) < 클래스(Class) < 패키지(Package)
+  메소드(Method) : floor, ceil...
+
+* 인스턴스(Instance)
+
+<pre><code>
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter; // 이게 없으면 작동x
+public class InstanceApp {
+ 
+    public static void main(String[] args) throws IOException{
+         
+        PrintWriter p1 = new PrintWriter("result1.txt");
+        // PrintWriter 클래스의 이름을 p1으로 설정함.
+        // new 키워드를 통한 인스턴스를 생성
+        p1.write("Hello 1");
+        p1.close();
+         
+        PrintWriter p2 = new PrintWriter("result2.txt");
+        p2.write("Hello 2");
+        p2.close();
+
+    }
+        // 생성자(Constructors)가 없으면 1회용 이다. (math)
+		// 생성자가 있으면 생성자를 이용해 인스턴스를 만드는 것이 허용 되어있다.
+}
+</code></pre>
+
+* 상속(Inheritance)
+
+<pre><code>
+java.lang.Object			 // 전체
+	java.io.Writer  		 // Object 에게 상속받음
+		jave.io.PrintWriter  // Writer 에게 상속받음
+</code></pre>
+
+* AccountingApp
+
+<pre><code>
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Value of supply : " +10000.0);
+        System.out.println("VAT : " +(10000.0*0.1));
+        System.out.println("Total : " +(10000.0+(10000.0*0.1)));
+        System.out.println("Expense : " +(10000.0*0.3));
+        System.out.println("Income : " +(10000.0-(10000.0*0.3)));
+        System.out.println("Dividend 1 : " +(10000.0-(10000.0*0.3))*0.5);
+        System.out.println("Dividend 2 : " +(10000.0-(10000.0*0.3))*0.3);
+        System.out.println("Dividend 3 : " +(10000.0-(10000.0*0.3))*0.2);
+
+        // Edit -> Find/Replace -> 숫자 10000.0을 12345.0으로 바꿀 수 있다
+	}
+
+}
+</code></pre>
+
+* 이전 프로그램에 변수 도입
+
+<pre><code>
+public class AccountingApp {
+ 
+    public static void main(String[] args) {
+ 
+        double valueOfSupply = 10000.0;
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+        double dividend1 = income * 0.5;
+        double dividend2 = income * 0.3;
+        double dividend3 = income * 0.2;
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+ 
+    }
+ 
+}
+</code></pre>
+
+***
+
+2023-05-09
+-------------
+
+* 조건문
+
+<pre><code>
+if(income > 10000.0) {
+    dividend1 = income * 0.5;
+    dividend2 = income * 0.3;
+    dividend3 = income * 0.2;
+} else {
+    dividend1 = income * 0.4;
+    dividend2 = income * 0.2;
+    dividend3 = income * 0.1;
+}
+</code></pre>
+
+* 배열
+
+<pre><code>
+double rate1 = 0.5;
+double rate2 = 0.3;
+double rate3 = 0.2;
+        
+double dividend1 = income * rate1;
+double dividend2 = income * rate2;
+double dividend3 = income * rate3;
+//변수가 많으면 변수가 더럽혀질 가능성이 커진다는 문제점이 있다. 세 개의 변수가 서로 같은 성격의 데이터라는 것이 분명하지 않다.
+
+double[] dividendRates = new double[3];
+// double형 데이터로 이루어진 배열이다.
+// double형의 데이터를 3개를 담을 수 있는 수납상자
+dividendRates[0] = 0.5;
+dividendRates[1] = 0.3;
+dividendRates[2] = 0.2;
+        
+double dividend1 = income * dividendRates[0];
+double dividend2 = income * dividendRates[1];
+double dividend3 = income * dividendRates[2];
+</code></pre>
+
+* 반복문
+
+<pre><code>
+int i = 0;
+while(i < dividendRates.length) {
+    System.out.println("Dividend : " + (income*dividendRates[i]) );
+    i = i + 1;
+}
+</code></pre>
+
+* 메소드
+  
+  메소드는 서로 연관된 코드를 그룹핑 해서 이름을 붙인 정리정돈의 상자이다.
+
+<pre><code>
+  public class AccountingMethodApp {
+    public static double valueOfSupply;
+    public static double vatRate;
+    public static double expenseRate;
+    public static void main(String[] args) { 
+    // void main 밖으로 꺼내 전역변수로 설정한다.
+        valueOfSupply = 10000.0;
+        vatRate = 0.1;
+        expenseRate = 0.3;
+        print();
+    }
+ 
+    public static void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public static double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public static double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public static double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public static double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public static double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+ 
+}
+</code></pre>
+
+* 클래스
+
+<pre><code>
+class Accounting{
+    public static double valueOfSupply;
+    public static double vatRate;
+    public static double expenseRate;
+    public static void print() {
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+        System.out.println("Expense : " + getExpense());
+        System.out.println("Income : " + getIncome());
+        System.out.println("Dividend 1 : " + getDiviend1());
+        System.out.println("Dividend 2 : " + getDiviend2());
+        System.out.println("Dividend 3 : " + getDiviend3());
+    }
+ 
+    public static double getDiviend1() {
+        return getIncome() * 0.5;
+    }
+    public static double getDiviend2() {
+        return getIncome() * 0.3;
+    }
+    public static double getDiviend3() {
+        return getIncome() * 0.2;
+    }
+ 
+    public static double getIncome() {
+        return valueOfSupply - getExpense();
+    }
+ 
+    public static double getExpense() {
+        return valueOfSupply * expenseRate;
+    }
+ 
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    } 
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+}
+public class AccountingClassApp {
+     
+    public static void main(String[] args) {
+        Accounting.valueOfSupply = 10000.0;
+        Accounting.vatRate = 0.1;
+        Accounting.expenseRate = 0.3;
+        Accounting.print();
+        // anotherVariable = ...;
+        // anotherMethod = ...;
+    }
+}
+</code></pre>
+
+* 인스턴스
+
+  하나의 클래스를 복제해서 서로 다른 데이터의 값과 서로 같은 메소드를 가진 복제본을 만드는 것이다.
+
+<pre><code>
+public class AccountingClassApp {
+	
+	public static void main(String[] args) {
+		Accounting.valueOfSupply = 10000.0;
+		Accounting.vatRate = 0.1;
+		Accounting.expenseRate = 0.3;	
+		Accounting.print();
+		//...
+		Accounting.valueOfSupply = 20000.0;
+		Accounting.vatRate = 0.05;
+		Accounting.expenseRate = 0.2;	
+		Accounting.print();
+		//...
+		
+		Accounting.valueOfSupply = 20000.0;
+		Accounting.vatRate = 0.05;
+		Accounting.expenseRate = 0.2;	
+		Accounting.print();
+		
+	}
+}
+// 이 과정이 빈번하게 발샐한다고 한다면 이렇게 클래스의 내부적인 상태를 바꾸는 행위가 버그를 우발할 가능성이 매우 높다. 
+</code></pre>
+
+***
+
+2023-05-10
+-------------
