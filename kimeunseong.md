@@ -9,7 +9,7 @@
 public class @@@
     pulic static void main(String[] args){
 
-    System.out.println("@@@@")
+    System.out.println("aaaa")
 
     }
 
@@ -286,7 +286,7 @@ roomLamp.on();
 JOptionPane 객체의 showInputDialog 메소드를 이용하여 id값을 사용자가 입력하게 할 수 있다
 JOptionPane 객체를 이용하기 위해서 import 구문을 사용함
 
-
+<pre><code>
 import javax.swing.JOptionPane;
 
 import org.opentutorials.iot.DimmingLights;
@@ -320,7 +320,7 @@ public class OKjavaGoInHomeInput {
         moodLamp.on(); 
     }
 }
-
+</code></pre>
 
 아규먼트를 이용해 프로그램 실행시키기
 
@@ -377,4 +377,371 @@ java -cp ".;@@" aa
 
 javac @@.jave // 컴파일시킴
 java @@ "aa" 11  // 아규먼트 값은 클래스 파일 실행 명령어 이후 바로 적어서 값을 설정 가능하다
+
+
+___
+0508
+
+# 자바문서 보는법 (자바1 - 13과)
+
+- API 와 UI 의 차이점
+
+	작업들의 시간적 순서에 주목 -> 프로그램
+
+	도구의 응용에 주목 -> 애플리케이션
+
+	- 자바의 도구들을 응용해서 사용하기 위해서 일정한 조작 장치를 구성한 것을  __자바 API__ 라고 한다.
+
+	- 사용자가 자바 프로그램을 사용할 수 있도록 만들어둔 장치들을 __UI__ 라고 한다.
+
+- Java API documentation 사용법
+
+	패키지와 클래스를 찾아볼 수 있고 자신이 찾은 클래스가 어떤 패키지에 속해있는지 알 수 있다.
+
+	 패키지 > 클래스 > 변수, 메소드
+
+- 클래스에 대하여
+
+<pre><code>
+public class ClassApp {
+	public static void main(String[] args) {
+		
+		System.out.println(Math.PI);  // PI 변수를 이용해 파이값을 나타냄
+		System.out.println(Math.floor(1.6));  // 1.6 이라는 실수를 floor 를 사용해 소수점 이하에 대해서 날린 값을 출력함 
+		System.out.println(Math.ceil(1.6));   // 1.6 이라는 실수를 ceil 을 사용해 소수점 이하에 대해서 올림한 값을 출력함
+	}
+}
+</code></pre>
+	 
+Math 클래스에는 수학과 관련된 여러 변수들과 메소드들이 있다.
+
+PI 변수는 원주율이 적절한 정밀도로 저장되어 있는 변수다.
+
+floor 메소드는 특정 소수점 이하에 대해서 버림한 값을 산출한다.
+
+ceil 메소드는 특정 소수점 이하에 대해서 올림한 값을 산출한다.
+
+	
+- 인스턴스
+
+<pre><code>
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;  //  java.io 패키지에서 불러옴
+public class InstanceApp {
+
+	public static void main(String[] args) throws IOException {
+		
+		PrintWriter p1 = new PrintWriter("result1.txt");  
+		// PrintWriter 객체는 math 클래스와 다르게 new 키워드를 통한 인스턴스를 생성한다.
+		// PrintWriter 클래스의 이름을 p1으로 설정함.
+		
+		p1.write("Hello 1");
+		p1.close();	
+		
+		PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		p2.toString();
+
+		// 간단하게 끝나는 작업이면 평범하게 하면 되지만 작업량이 많아지고 긴 맥락일시 인스턴스를 사용하는것이 더욱 효율적이다.
+		// 생성자(Constructors)가 없으면 1회용 이다. (math)
+		// 생성자가 있으면 생성자를 이용해 인스턴스를 만드는 것이 허용 되어있다.
+
+		// Add throws declaration을 이용해서 에러 핸들링을 할 수 있다.
+	}
+
+}
+
+</code></pre>
+
+- 상속
+
+<pre><code>
+java.lang.Object			 // 베이스
+	java.io.Writer  		 // Object 에게 상속받음
+		jave.io.PrintWriter  // Writer 에게 상속받음
+
+// 자식은 부모의 메소드를 사용가능 (상위 개체의 정보를 물려받음)
+// Writer 에도 write 기능이 있고 PrintWriter 에도 write 기능이 있을때 PrintWriter 의 write 기능을 사용하는 것을 override 라고 함
+	</code></pre>
+
+# 나의 앱 만들기 (자바1 - 14과)
+
+- 공급가, 부가가치세, 비용, 이익, 배당을 자동으로 계산해주는 나만의 앱 만들기
+
+<pre><code>
+public class AccountingApp {
+    public static void main(String[]args){
+
+        System.out.println("공급가 : "+ 10000.0);
+        System.out.println("부가가치세 :"+ (10000.0*0.1));
+        System.out.println("총합 : "+ (10000.0 + 10000.0*0.1));
+        System.out.println("비용 : "+ (10000.0*0.3));
+        System.out.println("이익 : "+ (10000.0 - 10000.0*0.3));
+        System.out.println("배분 1 : "+ (10000.0 - 10000.0*0.3) * 0.5);
+        System.out.println("배분 2 : "+ (10000.0 - 10000.0*0.3) * 0.3);
+        System.out.println("배분 3 : "+ (10000.0 - 10000.0*0.3) * 0.2);
+    }
+}
+</code></pre>
+
+- 변수도입
+
+<pre><code>
+public class AccountingApp {
+    public static void main(String[]args){
+        double ValueofSupply = 10000.0;
+		// double ValueofSupply = Double.parseDouble(args[0]);
+		// ValueofSupply가 아규먼트를 받게함
+        double VATrate = 0.1;
+        double ExpenseRate = 0.3;
+        double VAT = ValueofSupply * VATrate;
+        double Expense = ValueofSupply * ExpenseRate;
+        double Income = ValueofSupply - Expense;
+        double Dividend 1 = Income * 0.5;
+        double Dividend 2 = Income * 0.3;
+        double Dividend 3 = Income * 0.2;
+
+        // 계산식과 값들을 변수로 바꾸어줌
+
+		// Alt + Ctrl + V  변수지정 단축키 
+		// Ctrl + R 	   찾아서 바꾸기
+
+        System.out.println("Value of supply : "+ ValueofSupply);
+        System.out.println("VAT :"+ VAT);
+        System.out.println("Total : "+ (ValueofSupply + VAT));
+        System.out.println("Expense : "+ Expense);
+        System.out.println("Income : "+ Income);
+        System.out.println("Dividend 1 : "+ Dividend 1);
+        System.out.println("Dividend 2 : "+ Dividend 2);
+        System.out.println("Dividend 3 : "+ Dividend 3);
+
+		
+    }
+}
+</code></pre>
+
+___
+
+0509
+
+# 나의 앱 만들기 (자바1 - 14과 뒷부분)
+
+## 제어문
+
+- 조건문
+
+<pre><code>
+
+        if(Income >= 30000.0) {
+            Dividend1 = Income * 0.5;
+            Dividend2 = Income * 0.3;
+            Dividend3 = Income * 0.2;
+        }
+        else {
+            Dividend1 = Income * 0.7;
+            Dividend2 = Income * 0.2;
+            Dividend3 = Income * 0.1;
+        }
+
+		//if 문을 사용하여 Income이 30000.0 보다 크거나 같을 경우와 그렇지 않을 경우에 사용할 식을 다르게 함
+    
+
+</code></pre>
+
+- 배열
+
+<pre><code>
+
+        double[] DividendRates = new double[3]; 
+		// DividendRates 라는 변수에 double 값을 3개 저장 할 수 있게 한다.
+
+        DividendRates[0] = 0.5;
+        DividendRates[1] = 0.3;
+        DividendRates[2] = 0.2;
+
+        double Dividend1 = Income * DividendRates[0];
+        double Dividend2 = Income * DividendRates[1];
+        double Dividend3 = Income * DividendRates[2];
+
+</code></pre>
+
+- 반복문
+
+<pre><code>
+        int i = 0;  // i 값 할당
+        while (i < DividendRates.length) {  // i 가 DividendRates의 갯수보다 작을동안 ( [0],[1],[2] 로 총 3개) while문 안의 코드를 실행한다
+            System.out.println("Dividend : " + (Income *DividendRates[i]) );  
+            i = i + 1;
+		}
+</code></pre>
+
+- 메소드
+
+메소드는 서로 연관된 코드를 그룹핑 해서 이름을 붙인 정리정돈의 상자이다.
+
+<pre><code>
+public class AccountingApp {
+    public static double ValueSupply = 10000.0;  
+    public static double VATrate = 0.1;
+    public static double ExpenseRate = 0.3;
+	// void main 밖으로 꺼내 전역변수로 설정한다.
+
+    public static void main(String[]args){
+
+        ValueSupply = 10000.0;
+        VATrate = 0.1;
+        ExpenseRate = 0.3;
+
+        print();
+
+		// 모두 메소드화 시켜 main 안쪽을 깔끔하게 만들었다.
+    }
+
+    private static double getDividend3() {
+        return getIncome() * 0.2;
+    }
+
+    private static double getDividend2() {
+        return getIncome() * 0.3;
+    }
+
+    private static double getDividend1() {
+        return getIncome() * 0.5;
+    }
+
+    private static void print() {
+        System.out.println("Value of supply : "+ ValueSupply);
+        System.out.println("VAT :"+ getVat());
+        System.out.println("Total : "+ (ValueSupply + getVat()));
+        System.out.println("Expense : "+ getExpense());
+        System.out.println("Income : "+ getIncome());
+        System.out.println("Dividend 1 : "+ getDividend1());
+        System.out.println("Dividend 2 : "+ getDividend2());
+        System.out.println("Dividend 3 : "+ getDividend3());
+    }
+
+    private static double getIncome() {
+        return ValueSupply - getExpense();
+    }
+
+    private static double getExpense() {
+        return ValueSupply * ExpenseRate;
+    }
+
+    private static double getVat() {
+        return ValueSupply * VATrate;
+    }
+}
+
+</code></pre>
+
+- 클래스
+
+<pre><code>
+
+class Accounting{ 
+
+	// Accounting 클래스를 생성한다
+
+    public static double ValueSupply = 10000.0;
+    public static double VATrate = 0.1;
+    public static double ExpenseRate = 0.3;
+
+    private static double getDividend3() {
+        return getIncome() * 0.2;
+    }
+
+    private static double getDividend2() {
+        return getIncome() * 0.3;
+    }
+
+    private static double getDividend1() {
+        return getIncome() * 0.5;
+    }
+
+    public static void print() {
+        System.out.println("Value of supply : "+ Accounting.ValueSupply);
+        System.out.println("VAT :"+ getVat());
+        System.out.println("Total : "+ (ValueSupply + getVat()));
+        System.out.println("Expense : "+ getExpense());
+        System.out.println("Income : "+ getIncome());
+        System.out.println("Dividend 1 : "+ getDividend1());
+        System.out.println("Dividend 2 : "+ getDividend2());
+        System.out.println("Dividend 3 : "+ getDividend3());
+    }
+
+    private static double getIncome() {
+        return ValueSupply - getExpense();
+    }
+
+    private static double getExpense() {
+        return ValueSupply * ExpenseRate;
+    }
+
+    private static double getVat() {
+        return ValueSupply * VATrate;
+    }
+}
+public class AccountingIFApp {
+
+    public static void main(String[]args){
+
+        Accounting.ValueSupply = 10000.0;
+        Accounting.VATrate = 0.1;
+        Accounting.ExpenseRate = 0.3;
+        Accounting.print();
+
+		// class Accounting 에 소속된 정보들을 가져온다
+    }
+
+
+}
+</code></pre>
+
+- 인스턴스
+
+<pre><code>
+
+
+		class Accounting1 ~~
+		class Accounting2 ~~
+
+        Accounting1.ValueSupply = 10000.0;
+        Accounting1.VATrate = 0.1;
+        Accounting1.ExpenseRate = 0.3;
+        Accounting1.print();
+
+		Accounting2.ValueSupply = 10000.0;
+        Accounting2.VATrate = 0.1;
+        Accounting2.ExpenseRate = 0.3;
+        Accounting2.print();
+
+		Accounting1.print();
+
+		// 이 상황에서 클래스를 깔끔하게 정리하는방법
+
+</code></pre>
+
+<pre><code>
+
+        Accounting a1 = new Accounting();
+
+        a1.ValueSupply = 10000.0;
+        a1.VATrate = 0.1;
+        a1.ExpenseRate = 0.3;
+        a1.print();
+
+        Accounting a2 = new Accounting();
+
+        a2.ValueSupply = 20000.0;
+        a2.VATrate = 0.05;
+        a2.ExpenseRate = 0.3;
+        a2.print();
+
+        a1.print();
+
+		// 이렇게 정리 가능
+</code></pre>
 
