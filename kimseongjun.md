@@ -1262,3 +1262,365 @@ public class staticMethod {
 }
 >> static 메소드는 클래스의 메소드로 프로그램에서 한번만 정의된다. 즉 여러 개 가잘 수 없는 유일무히한 메소드
 >> static이 아닌 메소드는 인스턴스의 메소드로 프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드
+
+=============================
+JAVA 객체지향 프로그래밍
+=============================
+> 객체 지향 프로그래밍: 클래스를 이용하여 프로그램의 구조를 만들어 가는 방식
+> 객체 지향 언어: 언어 차원에서 지원하는 프로그래밍 언어
+
+남의 클래스 남의 인스턴스
+-------------------------------
+import java.io.FileWriter;
+import java.io.IOException;
+public class OthersOOP {
+ 
+    public static void main(String[] args) throws IOException {
+        // class : System, Math, FileWriter
+        // instance : f1, f2
+         
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.8));
+        System.out.println(Math.ceil(1.8));
+         
+        FileWriter f1 = new FileWriter("data.txt"); 
+        f1.write("Hello");
+        f1.write(" Java");
+  
+         
+        FileWriter f2 = new FileWriter("data2.txt");
+        f2.write("Hello");
+        f2.write(" Java2");
+        f2.close();
+         
+        f1.write("!!!");
+        f1.close();
+    }
+ 
+}
+# result
+3.141592653589793
+1.0
+2.0
+>> Math 클래스에서는 이름에 걸맞게 수학적 계산을 도와주는 여러 메소드를 포함하고 있고, 이전에 사용했던 floor, cell메소드, 클래스의 필드(변수)로 PI 등이 있다.
+# 이러한 메소드와 변수는 인스턴스를 생성하지 않더라도 클래스에서 직접적으로 호출할 수 있다.
+
+>> FileWriter 클래스: 파일을 열어서 원하는 내용을 입력할 수 있는 기능들을 제공, 그래서 각각의 파일에 해당하는 인스턴스르 생성하여 write 메소드로 쓰기 작업을 수행하고 close 메소드로 파일을 닫는다.
+# 이러한 메소드와 변수는 인스턴스를 생성하여 사용하여야 하고 클래스에서 직접적으로 호출할 수 없음 !
+
+변수와 메소드
+-----------------------------
+
+public class MyOOP {
+
+	public static void main(String[] args) {
+		
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+		
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+	}
+
+}
+# result
+----
+A
+A
+----
+A
+A
+> 이전에 배웠던 코드 인용
+public class MyOOP {
+
+	public static void main(String[] args) {
+		
+		printA();
+		
+		printA();
+	}
+
+	public static void printA() {
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+	}
+
+}
+# result 
+----
+A
+A
+----
+A
+A
+>> 중복되는 작업을 메소드로 추출해서 만들기
+
+public class MyOOP {
+
+	public static void main(String[] args) {
+		String delimiter = "----";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+		
+		delimiter = "****";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+	}
+
+	public static void printA(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+# result
+----
+A
+A
+----
+A
+A
+----
+B
+B
+----
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 구분자를 파라미터로 주어 실행할 때마다 원하는 구분자로 출력하기
+
+public class MyOOP {
+	public static String delimiter = "";
+	
+	public static void main(String[] args) {
+		delimiter = "----";
+		printA();
+		printA();
+		printB();
+		printB();
+		
+		delimiter = "****";
+		printA();
+		printA();
+		printB();
+		printB();
+	}
+
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+# result
+====
+A
+A
+====
+A
+A
+====
+B
+B
+====
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 구분자를 클래스의 변수로 추출
+
+class Print { /////
+	public static String delimiter = "";
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+	public static void printAll() {
+		printA();
+		printA();
+		printB();
+		printB();
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+		Print.printAll();
+		
+		Print.delimiter = "****";
+		Print.printAll();
+	}	
+}
+# result
+----
+A
+A
+----
+A
+A
+----
+B
+B
+----
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 하나의 클래스로 분리해서 정리정돈 
+
+클래스
+------------------------------
+> 클래스 : 관련있는 변수들과 메소드를 묶에서 정리정돈을 할 수 있개 하는 것 
+
+class Print{
+    public static String delimiter = "";
+    public static void A() {
+        System.out.println(delimiter);
+        System.out.println("A");
+        System.out.println("A");
+    }
+    public static void B(){
+        System.out.println(delimiter);
+        System.out.println("B");
+        System.out.println("B");
+    }
+}
+public class MyOOP {
+    public static void main(String[] args) {
+        Print.delimiter = "----";
+        Print.A();  
+        Print.A();
+        Print.B();
+        Print.B();
+
+        Print.delimiter = "****";
+        Print.A();
+        Print.A();
+        Print.B();
+        Print.B();
+
+    }
+}
+# 클래스의 장점
+> 관련있는 변수들과 메소드를 묶어서 정리정돈을 할 수 있다
+> print 객체의 a메소드이기 때문에 a를 출력한다는 의미를 쉽게 유추
+> 이클립스와 같은 IDE 프로그램을 이용하게 되면, 접근할 수 있는 클래스의 메소드, 변수를 추천해주는 기능도 존재, 프로그램을 작성하는 데에도 편의성을 증진시킬 수 있다.
+# 클래스의 형식
+> 클래스는 한 파일에 여러 개를 넣을 수 있지만, 접근제어가 public은 java 파일과 같은 이름의 클래스에 하나만 붙일 수 있다.
+> 한 파일 안에 여러 클래스가 등장할 수도 있지만 여러 클래스를 각각 하나의 java 파일로 만들게 되면, 
+프로그램의 기능별로 쪼개어서 소스 코드를 별도로 저장할 수 있게 된다.
+ 
+인스턴스
+-------------------------
+> 객체를 인스턴스로 만들면, 그 인스턴스를 바꾼다고 해도 다른 인스턴스에는 영향을 끼치지 않는다.
+> 지난 실습에 사용했던 print 클래스를 인스턴스로 만들어 작업하기
+class Print {
+	public static String delimiter = "";
+	public static void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+		Print.A();
+		Print.delimiter = "****";
+		Print.A();
+		Print.delimiter = "----";
+		Print.B();
+		Print.delimiter = "****";
+		Print.B();		
+	}	
+} //구분자를 바꿀때마다 필드에 새로 대입
+> 구분자를 바꿀때마다 필드에 새로 대입하여 만들었어야 했지만, 이번에는 구분자마다 인스턴스를 만들어보자
+class Print {
+	public String delimiter = "";
+	public void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print p1 = new Print();
+		p1.delimiter = "----";
+		Print p2 = new Print();
+		p2.delimiter = "****";
+		
+		p1.A();
+		p2.A();
+		p1.B();
+		p2.B();	
+	}	
+} //p1, p2 두 개의 인스턴스를 print 클래스를 이용해서 찍어낸 후, 각각 다른 구분자를 넣어줌
+>>> 위의 코드랑 결과는 똑같음.
