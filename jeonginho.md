@@ -1416,3 +1416,46 @@ public class staticMethod {
 -------------
 
 <hr/>
+
+< 2023-05-12 / JAVA 2 / 객체지향 프로그래밍 1 ~ 5 >
+-------------
+
+* 메소드와 절차적 프로그래밍
+-메소드는 언어마다 메소드, 함수, 서브루틴, 프로시저라는 이름으로 불림.   
+-이러한 메소드를 중심으로 프로그램을 만들어 나가는 프로그래밍을 절차적 프로그래밍이라고 함.   
+-대표적 언어 : C언어   
+
+* 클래스와 객체지향 프로그래밍
+-객체지향 프로그래밍 : 변수와 메소드를 모은 수납상자와 같은 클래스를 이용하여 프로그램을 정돈시켜 프로그램의 구조를 만들어 가는 방식.   
+-객체 지향 언어 : 위와 같은 방식은 언어차원에서 지원하는 프로그래밍 언어.   
+
+* 남의 클래스, 남의 인스턴스
+<pre><code>
+import java.io.FileWriter;
+import java.io.IOException;
+ 
+public class OthersOOP {
+ 
+    public static void main(String[] args) throws IOException {
+        // class : System, Math, FileWriter
+        // instance : f1, f2
+         
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.8));
+        System.out.println(Math.ceil(1.8));
+         
+        FileWriter f1 = new FileWriter("data.txt");
+        f1.write("Hello");
+        f1.write(" Java");
+         
+         
+        FileWriter f2 = new FileWriter("data2.txt");
+        f2.write("Hello");
+        f2.write(" Java2");
+        f2.close();
+         
+        f1.write("!!!");
+        f1.close();
+    }
+}
+</code></pre>
