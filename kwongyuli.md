@@ -1478,3 +1478,158 @@ public class staticMethod {
 }
 </code></pre>
 
+***
+
+2023-05-12 9일차 스터디
+-------------
+
+- procedural programming
+
+  method = function = subroutine = procedural = procedural programming
+
+	-> 절차지향 프로그래밍
+
+- oriented programming
+
+  class(method, variable)를 중심으로 프로그램의 구조를 만들어가는 컴퓨터 프로그래밍 방법론
+
+	-> 객체지향 프로그래밍
+
+- instance
+
+  복제된 것의 원형을 class라 하고, 저 원형인 class를 복제한 복제본 하나하나를 instance라 할 수 있다
+
+- new
+
+  class를 복제할 때 사용하는 키워드
+
+- OthersAppOPP
+
+<pre><code>
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class OthersAppOOP {
+
+	public static void main(String[] args) throws IOException {
+		// class : System, Math, FileWriter
+		// instance : f1, f2
+		
+		System.out.println(Math.PI); // Math는 class, PI는 variable
+		System.out.println(Math.floor(3.14)); // floor, ceil은 method
+		System.out.println(Math.ceil(3.14)); // 일회용 같은 애들
+		
+		FileWriter f1 = new FileWriter("data.txt"); // 어떤 정보를 파일에 기록할 때 사용하는 class
+		// new를 적음으로써 뒤에 따라오는 class는 data.txt에 파일을 저장하겠다는 상태를 가지고
+		// FileWriter의 복제본이 생성된다
+		f1.write("Hello"); // FileWriter의 instance가 생성됨
+		f1.write(" JAVA"); // instance의 메소드를 호출하는 것을 통해서 그 인스턴스를 조작할 수 있게됐다
+		f1.close(); // 파일 작업을 끝냈다는 뜻
+		
+		FileWriter f2 = new FileWriter("data2.txt");
+		f2.write("Hello !");
+		f2.close();
+
+	}
+
+}
+</code></pre>
+
+- MyOpp
+
+<pre><code>
+//public class MyOOP {
+//
+//	public static void main(String[] args) {
+//		delimiter = "------";  // method 안에서 정의된 변수는 그 method 안에서만 사용할 수 있다
+//		printA();
+//		printA();
+//		
+//		printB();
+//		printB();
+//		
+//		delimiter = "******";
+//		printA();
+//		printA();
+//		
+//		printB();
+//		printB();
+//	}
+//	
+//	public static String delimiter = "";
+//
+//	public static void printA() {
+//		System.out.println(delimiter);
+//		System.out.println("A");
+//		System.out.println("A");
+//	}
+//	
+//	public static void printB() {
+//		System.out.println(delimiter);
+//		System.out.println("B");
+//		System.out.println("B");
+//	}
+//
+//}
+</code></pre>
+
+- MyOPP2
+
+<pre><code>
+public class MyOOP2 {
+
+	public static void main(String[] args) {
+		Print p1 = new Print();
+		p1.delimiter = "@@@@@@@@@";
+		p1.A();
+		p1.A();
+		p1.B();
+		p1.B();
+		// 인스턴스화한 p1은 독립된 존재이기 때문에 중복된 코드를 작성할 필요가 없다
+		// 돌려막기할 필요가 없다 = 중복을 없앰
+		// 각각의 복제본은 서로 내부적으로 다른 데이터를 유지하게 한다
+		// (delimiter가 다르다)
+		
+		Print p2 = new Print();
+		p2.delimiter = "&&&&&&&&&";
+		p2.A();
+		p2.A();
+		p2.B();
+		p2.B();
+		
+	}
+	// 이렇게 하고 컴파일(저장)했을 때 .class 파일이 생성된다
+	// 하나의 파일 안에서 class를 여러개를 만들면 그 각각의 클래스가 파일로써 존재하게 된다
+	
+}
+</code></pre>
+
+- Print
+
+<pre><code>
+class Print{
+	public String delimiter = "";
+	// static은 static 뒤에 따라오는 String이 class의 소속이라는 것
+
+	public void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	} // class 키워드를 사용해서 class의 이름을 정하고, 중괄호 안에 class 소속인 변수,메소드(멤버)를 담아주면 된다
+	
+	public void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+	// 소스코드를 만들면 소스코드 이름과 똑같은 class를 하나 만드는 것
+	// 그러면 소스코드를 컴파일 해서 실행시키게 되면 자바는 저 파일의 이름과 똑같은 class를 찾아서
+	// 그 class의 main method를 실행하도록 약속되어 있다
+	// 이렇게 만든 class는 앞에 public(접근 제어자)을 붙여야 한다
+	// public은 한 번만 등장한다
+	
+	// Refactor -> Move Type to New File... -> 
+	// Type = 데이터 타입, class = 데이터 타입과 같은 표현이라 생각하기
+}
+</code></pre>
+

@@ -544,6 +544,7 @@ public class Accountingclass {
 //클래스의 상태를 변경하는 행위가 버그를 유발할 가능성이 있음
 //클래스 앞에 new를 붙여 복제한 것을 인스턴스(instance)라고 함
 //static이 사용되어서는 안됨
+
 class Accounting{
 	public double valueOfSupply;
 	public double vatRate;
@@ -623,3 +624,357 @@ public class Accountingclass {
 	
 	
 }
+0510
+public class BooleanApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(true);
+		System.out.println(false);
+		String foo = "Hello World";
+		System.out.println(foo.contains("world"));
+		System.out.println(foo.contains("egoin"));
+
+	}
+
+}
+//boolean은 값의 일치 불일치 여부를 확인할 수 있다.
+
+public class ComparisonOperatorApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1 > 1);//false
+		System.out.println(1 == 1);//true
+		System.out.println(1 < 1);//false
+		System.out.println(1 >= 1);//true
+		
+	}
+
+}
+//비교연산자는 두 값을 비교하여 비교에 대한 결과값을 출력함.
+
+if문의 작성
+public class ifApp {
+
+	public static void main(String[] args) {
+		
+		
+		//System.out.println("a");
+		//if(false) {
+			//System.out.println(1);
+		//} else {
+		//	if(true) {
+		//		System.out.println(2);
+		//	} else {
+		//		System.out.println(3);
+		//	}
+		//}
+		if(false) {
+			System.out.println(1);
+		} else if(true){
+			System.out.println(2);
+		} else {
+			System.out.println(3);
+		}
+		
+		System.out.println("b");
+		}
+}
+
+
+//비밀번호도 인식하게 바꾸고 논리연사자를 사용해 코드 간략화 실시
+public class AutApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(args[0]);
+
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "1111";
+		String inputPass = args[1];
+		
+		System.out.println("hi");
+		
+		//if(inputId == id) {
+//		if(inputId.equals(id)) {//코드가 반환하는 값은 boolean이다.
+//			if(inputPass.equals(pass)) {
+//				System.out.println("Master!");
+//			}else {
+//				System.out.println("wrong password");
+//			}
+//			
+//		}else {
+//			System.out.println(":Who are you?");
+//		}
+		if(inputId.equals(id)  && (inputPass.equals(pass)) ) {//논리연산자인 && 사용.
+			{
+				System.out.println("Master!");
+			}
+		}else {
+			System.out.println(":Who are you?");//코드 간략화 실시
+		}
+		
+	}
+
+}
+
+논리연산자를 이용해 2개의 비밀번호의 if를 간략화 시킬수 있다.
+public class AutApp2 {
+
+	public static void main(String[] args) {
+		
+		System.out.println(args[0]);
+
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "1111";
+		String pass2 = "2222";
+		String inputPass = args[1];
+		
+		System.out.println("hi");
+		boolean isRightPass = (inputPass.equals(pass) || inputPass.equals(pass2));
+		
+
+		if(inputId.equals(id)  &&  isRightPass  ) {
+			{
+				System.out.println("Master!");
+			}
+		}else {
+			System.out.println(":Who are you?");
+		}
+		
+	}
+
+}
+
+배열
+public class ArrayApp {
+
+	public static void main(String[] args) {
+		
+		String[] users = new String[3];
+		users[0] = "egoing";
+		users[1] = "jinhuck";
+		users[2] = "youbin";
+		System.out.println(users[1]);
+		System.out.println(users.length);
+		
+		int[] scores = {10,100,100};
+		System.out.println(scores[1]);
+		System.out.println(scores.length);
+	}
+
+}
+데이터타입[] 배열이름= new 데이터타입[크기]; 
+
+데이터타임[] 배열이름 = {데이터, 데이터, ...} 2가지 형식으로 배열 생성이 가능하다.
+
+반복문과 배열의 결합
+public class LoopArray {
+
+	public static void main(String[] args) {
+		
+		String[] users = new String[3];
+		users[0] = "egoing";
+		users[1] = "jinjuck";
+		users[2] = "youbin";
+		
+		for(int i = 0; i<3; i++) {
+			System.out.println(users[i]+",");
+		}
+	}
+
+}
+
+아이디 저장하는 프로그램
+public class AutApp3 {
+
+	public static void main(String[] args) {
+		
+		String[] users = {"egoing", "jinhuck", "youbin"};
+		String inputId = args[0];
+		
+		boolean isLogined = false;
+		for(int i = 0; i<users.length; i++) {
+			String currentId = users[i];
+			if(currentId.equals(inputId)) {
+				isLogined = true;
+				break;
+			}
+		}
+		System.out.println("hi,");
+		if(isLogined) {
+			System.out.println("master");
+		}else {
+			System.out.println("hwo are you");
+		}
+		
+	}
+
+}
+
+아이디와 비밀번호를 가지는 프로그램
+public class AutApp3 {
+
+	public static void main(String[] args) {
+		
+		//String[] users = {"egoing", "jinhuck", "youbin"};
+		String[][] users = {
+				{"egoing", "1111"},
+				{"jinhuck", "22222"},
+				{"youbin", "3333"}
+		};
+		String inputId = args[0];
+		String inputPass = args[1];
+		
+		boolean isLogined = false;
+		for(int i = 0; i<users.length; i++) {
+			String[] current = users[i];
+			if(
+					current[0].equals(inputId) && 
+					current[1].equals(inputPass)
+					) {
+				isLogined = true;
+				break;
+			}
+		}
+		System.out.println("hi,");
+		if(isLogined) {
+			System.out.println("master");
+		}else {
+			System.out.println("hwo are you");
+		}
+		
+	}
+
+}
+
+0511
+public class Firstmethod {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Hello Method");
+		System.out.println(Math.floor(1.1));
+
+	}
+
+}
+//프로그램을 실행하기 위해서는 main이라는 특수한 메소드를 사용해야한다
+
+public class whymethod {
+	public static void printTwoTimesA() {//메소드의 이름이printTwoTimesA
+		System.out.println("-");
+		System.out.println("a");
+		System.out.println("A");
+	}
+	public static void main(String[] args) {
+		
+		printTwoTimesA();
+		printTwoTimesA();
+		printTwoTimesA();//리팩터의 기능을 이용해서 편하게 메소드화 시킬수 있음.
+		
+		
+	}
+
+}
+
+//메소드로 값을 주입하는 방법
+public class whymethod {
+	public static void printTwoTimes(String text, String delimiter) {//text, delimiter를 매개변수랑 함parameter
+		System.out.println(delimiter);
+		System.out.println(text);
+		System.out.println(text);
+	}
+	public static void main(String[] args) {
+						//인자 argument
+		printTwoTimes("a", "-");
+		printTwoTimes("a", "*");
+		printTwoTimes("a", "&");
+		printTwoTimes("b", "!");
+	}
+
+}
+
+//메소드의 장점은 코드가 짧아지고 코드의 사용의 용이, 수정이 쉽다는 장점이 있지만 함수안에 어떤 코드가 있는지 보기 전에는 알아채기 어렵다는 단점이 있다.
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class whymethod {
+	
+	public static void main(String[]args)throws IOException{
+		String out = twoTimes("a","-");
+		System.out.println(out);
+		FileWriter fw = new FileWriter("out.txt");
+		fw.write(out);
+		fw.close();
+		System.out.println(twoTimes("a","*"));
+	}
+	public static String twoTimes(String text, String delimiter) {
+		String out = "";
+		out = out + delimiter + "\n";
+		out = out + text + "\n";
+		out = out + text + "\n";
+		return out;
+	
+	}
+	
+}
+
+
+//메소드를 이용해 코드를 간략하고 가독성이 좋게 만들수 있다.
+public class AccountingApp {
+	//공급가액	
+	public static double valueOfSupply = 10000.0;
+			
+			//부가가치세율
+	public static double vatRate = 0.1;
+	
+	public static double getVAT() {//메소드의 리턴값이 더블형임.
+		return valueOfSupply*vatRate;
+	}
+	public static double getTotal(){
+		return valueOfSupply + getVAT();
+	}
+	
+	public static void main(String[] args) {
+		
+		//부가세
+		//double vat = valueOfSupply*vatRate;
+		double vat = getVAT();
+		//합계
+		//double total = valueOfSupply + vat;
+		double total = getTotal();
+		
+		System.out.println("Value of supply : "+valueOfSupply);	
+		System.out.println("VAT : "+getVAT());
+		System.out.println("Total : "+ getTotal());
+		
+		
+	}
+
+}	
+
+
+class Greeting{
+	public static void hi() {
+		System.out.println("HI");
+	}
+}
+//public,protected, default, private
+public class AccesLevelModifierMethod {
+	
+	public static void main(String[] args) {
+		
+		Greeting.hi();
+
+	}
+
+}
+//private는 클래스 내부에서만 사용가능하다.
+//public은 클래스 외부에서도 사용이 가능하다.1
+

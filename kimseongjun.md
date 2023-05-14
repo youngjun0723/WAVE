@@ -943,6 +943,684 @@ public class ArrayApp {
  
 }
  
-=======
------------------------
->>>>>>> 881d7c444e50d32fc2984bfcebb7c3d7c00cf598
+종합 응용 
+---------------------------
+>> 이전에 사용했던 java 제어문 배열 + 반복문 + 조건문을 이용해서 로그인 프로그램을 확장시켜 보았다.
+public class AuthApp3 {
+
+    public static void main(String[] args) {
+
+        String[] users = { "egoing", "jinhuck", "youbin" };
+        String inputId = args[0];
+
+        boolean isLogined = false;
+        for (int i = 0; i < users.length; i++) {
+            String currentId = users[i];
+            if (currentId.equals(inputId)) {
+                isLogined = true;
+                break; 
+            }
+        }
+        System.out.println("Hi,");
+        if (isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+
+    }
+
+}
+>break: 더 이상 현재 반복문을 진행하기 않고 빠져나오게 하는 구문
+
+>>이차원 배열
+public class AuthApp4 {
+
+    public static void main(String[] args) {
+
+        // String[] users = {"egoing", "jinhuck", "youbin"};
+        String[][] users = {
+                { "egoing", "1111" },
+                { "jinhuck", "2222" },
+                { "youbin", "3333" }
+        };
+        String inputId = args[0];
+        String inputPass = args[1];
+
+        boolean isLogined = false;
+        for (int i = 0; i < users.length; i++) {
+            String[] current = users[i];
+            if (current[0].equals(inputId) &&
+                    current[1].equals(inputPass)) {
+                isLogined = true;
+                break;
+            }
+        }
+        System.out.println("Hi,");
+        if (isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+
+    }
+>> 터미널에서 javac AuthApp4.java 입력하고, java AuthApp4 [user] [비밀번호] 올바르게 입력하면 Hi, Master가 나오고, 아니면 who are you가 나오는 구문이다.
+}
+=========================
+java 메소드
+=========================
+>메소드: 클래스와 관련된 작업을 하는 함수
+>메소드에 대한 예제 : floor 메소드
+public class FirstMethod {
+ 
+    public static void main(String[] args) {
+         
+        System.out.println("Hello Method");
+        System.out.println(Math.floor(1.1)); 
+ >> floor 메소드는 double 형 자료형을 받아서 내림 연산을 수행하여 double 형으로 반환
+    }
+메소드의 기본 형식
+---------------------
+>1억줄 이상의 코드가 있는 상황, 메소드를 이용해서 같은 코드 재사용, 유지보수를 쉽게 할 수 있다!!
+}
+public class WhyMethod {
+     
+    public static void main(String[] args) {
+         
+        // 100000000
+        printTwoTimesA();
+        // 100000000
+        printTwoTimesA();
+        // 100000000
+        printTwoTimesA();
+ 
+    }
+ 
+    public static void printTwoTimesA() {
+        System.out.println("-");
+        System.out.println("a");
+        System.out.println("a");
+    }
+ 
+}
+> 이클립스에서 Refactor라는 기능 -> 메소스 추출을 빠르게 할 수 있도록 도와줌
+> 메소드 추출을 원하는 부분을 블록으로 지정하여 우클릭 후 Refactor -> Extract Method
+> 메소드 이름 입력, priview를 누르면 미리 바뀔 모습을 확인 가능
+> ok버튼을 눌러서 메소드를 추출할 수 있음
+ 
+메소드의 입력
+--------------------
+>매개변수는 메소드 안에서 통용되는 변수, 메소드를 호출할 때는 실제 데이터를 메소드의 파라미터 안에 넣게 되는데 이를 인자(아규먼트)라고 함
+public class WhyMethod {
+     
+    public static void main(String[] args) { //main 메소드는 문자열 배열인 args 파라미터 이용
+         
+                         //인자, argument
+            printTwoTimes("a", "-");
+            // 100000000
+            printTwoTimes("a", "*");
+            // 100000000
+            printTwoTimes("a", "&");
+            printTwoTimes("b", "!");
+ 
+    }
+                                     //매개변수,parameter 
+    public static void printTwoTimes(String text, String delimiter) {
+        System.out.println(delimiter);
+        System.out.println(text);
+        System.out.println(text);
+    }
+ 
+}
+# result
+*
+a
+a
+&
+a
+a
+!
+b
+b
+
+메소드의 출력
+--------------------
+public class OutputMethod {
+     
+    public static String a() {
+        // ... 
+        return "a";
+    }
+     
+    public static int one() {
+        return 1;
+        //...
+    }
+ 
+    public static void main(String[] args) {
+ 
+        System.out.println(a());
+        System.out.println(one());
+         
+    }
+> 메소드가 데이터를 변환하도록 만들기 위해 구성 요소들이 필요하다.
+>> 반환되는 데이터의 타입, return
+>메소드가 반환하지 않는다면 void를 넣는다.
+'return 반환값' 형식으로 입력하여 메소드가 데이터를 반환하도록 한다.
+그리고 return이 실행된 후에는 그 뒤에 실행할 코드가 메소드에 남아 있어도 더 처리하지 않고 바로 메소드를 빠져 나오도록 함
+}
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WhyMethod {
+
+	public static void main(String[] args) throws IOException {
+		String out = twoTimes("a", "-");
+		System.out.println(out);
+		FileWriter fw = new FileWriter("out.txt");
+		fw.write(out);
+		fw.close();
+		System.out.println(twoTimes("a", "*"));
+	}
+	public static String twoTimes(String text, String delimiter) {
+		String out = "";
+		out = out + delimiter + "\n";
+		out = out + text + "\n";
+		out = out + text + "\n";
+		return out;
+	}
+}
+메소드의 활용
+------------------
+> 이전 쉽게 배우는 자바 14-1 AccountingApp 코드 참조
+>> 1
+public class AccountingApp { 
+
+	public static void main(String[] args) {
+		double valueOfSupply = 10000.0;
+		double vatRate = 0.1;
+		double vat = valueOfSupply * vatRate;
+		double total = valueOfSupply + vat;
+		
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+	}
+
+}
+# result
+Value of supply : 10000.0
+VAT : 1000.0
+Total : 11000.0
+>> 여기서 부가가치세와 총 가격을 구하는 부분을 메소드로 추출해서 만들어보자.
+>> 2
+public class AccountingApp {
+	// 공급가액
+	public static double valueOfSupply = 10000.0;
+	// 부가가치세율
+	public static double vatRate = 0.1;
+
+	public static double getVAT(){
+		return valueOfSupply*vatRate;
+	}
+
+	public static double getTotal(){
+		return valueOfSupply + getVAT();
+	}
+
+	public static void main(String[] args){
+		System.out.println("Value of supply:"+valueOfSupply);
+		System.out.println("VAT:"+getVAT());
+		System.out.println("Total:"+getTotal());
+
+   }
+
+}
+# result
+Value of supply:10000.0
+VAT:1000.0
+Total:11000.0
+> 공급가와 부가가치세율은 모든 메소드에서 바로 접근할 수 있게 클래스의 static 필드로 빼내었다. 이렇게 메소드를 이용해서 만든 코드는 재사용성이 휠씬 높아진다 !
+>>> (1번 코드랑 2번 코드 결과값은 같음)
+부록 (access level modifiers, static)
+-----------------------------
+
+접근 제어 
+--------------
+>> public ? ?
+> 동작을 제어하기 위해서 바깥으로 드러나서 호출할 수 있는 것들을 위해 지정함
+>> private ? ?
+> 외부에서 굳이 알 필요도 없거나 알아서는 안되는 것들을 위해서 지정함
+public class AccessLevelModifiersMethod {
+
+	private static void hi() {
+		System.out.println("Hi");
+	}
+	public static void main(String[] args) {
+		hi();
+	}
+# result
+Hi
+}
+
+(static)
+------------
+>> 클래스 ? ?
+>일종의 형들
+>> 인스턴스 ? ?
+>그 형들로 찍어서 만든 실체
+
+static 메소드는 클래스의 메소드로, 
+프로그램에서 한번만 정의됩니다. 즉 여러 개 가질 수 없는 유일무이한 메소드이다.
+반면 static이 아닌 메소드는 인스턴스의 메소드로, 
+프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드이다.
+
+class Print{
+    public String delimiter;
+    public void a() {
+        System.out.println(this.delimiter);
+        System.out.println("a");
+        System.out.println("a");
+    }
+    public void b() {
+        System.out.println(this.delimiter);
+        System.out.println("b");
+        System.out.println("b");
+         
+    }
+    public static void c(String delimiter) {
+        System.out.println(delimiter);
+        System.out.println("b");
+        System.out.println("b");
+    }
+}
+public class staticMethod {
+     
+    public static void main(String[] args) {
+//      Print.a("-");
+//      Print.b("-");
+         
+        // instance
+        Print t1 = new Print();
+        t1.delimiter = "-";
+        t1.a();
+        t1.b();
+        Print.c("$");
+         
+         
+//      Print.a("*");
+//      Print.b("*");
+         
+        Print t2 = new Print();
+        t2.delimiter = "*";
+        t2.a();
+        t2.b();
+    }
+     
+ 
+}
+>> static 메소드는 클래스의 메소드로 프로그램에서 한번만 정의된다. 즉 여러 개 가잘 수 없는 유일무히한 메소드
+>> static이 아닌 메소드는 인스턴스의 메소드로 프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드
+
+=============================
+JAVA 객체지향 프로그래밍
+=============================
+> 객체 지향 프로그래밍: 클래스를 이용하여 프로그램의 구조를 만들어 가는 방식
+> 객체 지향 언어: 언어 차원에서 지원하는 프로그래밍 언어
+
+남의 클래스 남의 인스턴스
+-------------------------------
+import java.io.FileWriter;
+import java.io.IOException;
+public class OthersOOP {
+ 
+    public static void main(String[] args) throws IOException {
+        // class : System, Math, FileWriter
+        // instance : f1, f2
+         
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.8));
+        System.out.println(Math.ceil(1.8));
+         
+        FileWriter f1 = new FileWriter("data.txt"); 
+        f1.write("Hello");
+        f1.write(" Java");
+  
+         
+        FileWriter f2 = new FileWriter("data2.txt");
+        f2.write("Hello");
+        f2.write(" Java2");
+        f2.close();
+         
+        f1.write("!!!");
+        f1.close();
+    }
+ 
+}
+# result
+3.141592653589793
+1.0
+2.0
+>> Math 클래스에서는 이름에 걸맞게 수학적 계산을 도와주는 여러 메소드를 포함하고 있고, 이전에 사용했던 floor, cell메소드, 클래스의 필드(변수)로 PI 등이 있다.
+# 이러한 메소드와 변수는 인스턴스를 생성하지 않더라도 클래스에서 직접적으로 호출할 수 있다.
+
+>> FileWriter 클래스: 파일을 열어서 원하는 내용을 입력할 수 있는 기능들을 제공, 그래서 각각의 파일에 해당하는 인스턴스르 생성하여 write 메소드로 쓰기 작업을 수행하고 close 메소드로 파일을 닫는다.
+# 이러한 메소드와 변수는 인스턴스를 생성하여 사용하여야 하고 클래스에서 직접적으로 호출할 수 없음 !
+
+변수와 메소드
+-----------------------------
+
+public class MyOOP {
+
+	public static void main(String[] args) {
+		
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+		
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+	}
+
+}
+# result
+----
+A
+A
+----
+A
+A
+> 이전에 배웠던 코드 인용
+public class MyOOP {
+
+	public static void main(String[] args) {
+		
+		printA();
+		
+		printA();
+	}
+
+	public static void printA() {
+		System.out.println("----");
+		System.out.println("A");
+		System.out.println("A");
+	}
+
+}
+# result 
+----
+A
+A
+----
+A
+A
+>> 중복되는 작업을 메소드로 추출해서 만들기
+
+public class MyOOP {
+
+	public static void main(String[] args) {
+		String delimiter = "----";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+		
+		delimiter = "****";
+		printA(delimiter);
+		printA(delimiter);
+		printB(delimiter);
+		printB(delimiter);
+	}
+
+	public static void printA(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB(String delimiter) {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+# result
+----
+A
+A
+----
+A
+A
+----
+B
+B
+----
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 구분자를 파라미터로 주어 실행할 때마다 원하는 구분자로 출력하기
+
+public class MyOOP {
+	public static String delimiter = "";
+	
+	public static void main(String[] args) {
+		delimiter = "----";
+		printA();
+		printA();
+		printB();
+		printB();
+		
+		delimiter = "****";
+		printA();
+		printA();
+		printB();
+		printB();
+	}
+
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+# result
+====
+A
+A
+====
+A
+A
+====
+B
+B
+====
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 구분자를 클래스의 변수로 추출
+
+class Print { /////
+	public static String delimiter = "";
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+	public static void printAll() {
+		printA();
+		printA();
+		printB();
+		printB();
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+		Print.printAll();
+		
+		Print.delimiter = "****";
+		Print.printAll();
+	}	
+}
+# result
+----
+A
+A
+----
+A
+A
+----
+B
+B
+----
+B
+B
+****
+A
+A
+****
+A
+A
+****
+B
+B
+****
+B
+B
+>> 하나의 클래스로 분리해서 정리정돈 
+
+클래스
+------------------------------
+> 클래스 : 관련있는 변수들과 메소드를 묶에서 정리정돈을 할 수 있개 하는 것 
+
+class Print{
+    public static String delimiter = "";
+    public static void A() {
+        System.out.println(delimiter);
+        System.out.println("A");
+        System.out.println("A");
+    }
+    public static void B(){
+        System.out.println(delimiter);
+        System.out.println("B");
+        System.out.println("B");
+    }
+}
+public class MyOOP {
+    public static void main(String[] args) {
+        Print.delimiter = "----";
+        Print.A();  
+        Print.A();
+        Print.B();
+        Print.B();
+
+        Print.delimiter = "****";
+        Print.A();
+        Print.A();
+        Print.B();
+        Print.B();
+
+    }
+}
+# 클래스의 장점
+> 관련있는 변수들과 메소드를 묶어서 정리정돈을 할 수 있다
+> print 객체의 a메소드이기 때문에 a를 출력한다는 의미를 쉽게 유추
+> 이클립스와 같은 IDE 프로그램을 이용하게 되면, 접근할 수 있는 클래스의 메소드, 변수를 추천해주는 기능도 존재, 프로그램을 작성하는 데에도 편의성을 증진시킬 수 있다.
+# 클래스의 형식
+> 클래스는 한 파일에 여러 개를 넣을 수 있지만, 접근제어가 public은 java 파일과 같은 이름의 클래스에 하나만 붙일 수 있다.
+> 한 파일 안에 여러 클래스가 등장할 수도 있지만 여러 클래스를 각각 하나의 java 파일로 만들게 되면, 
+프로그램의 기능별로 쪼개어서 소스 코드를 별도로 저장할 수 있게 된다.
+ 
+인스턴스
+-------------------------
+> 객체를 인스턴스로 만들면, 그 인스턴스를 바꾼다고 해도 다른 인스턴스에는 영향을 끼치지 않는다.
+> 지난 실습에 사용했던 print 클래스를 인스턴스로 만들어 작업하기
+class Print {
+	public static String delimiter = "";
+	public static void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+		Print.A();
+		Print.delimiter = "****";
+		Print.A();
+		Print.delimiter = "----";
+		Print.B();
+		Print.delimiter = "****";
+		Print.B();		
+	}	
+} //구분자를 바꿀때마다 필드에 새로 대입
+> 구분자를 바꿀때마다 필드에 새로 대입하여 만들었어야 했지만, 이번에는 구분자마다 인스턴스를 만들어보자
+class Print {
+	public String delimiter = "";
+	public void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	
+	public static void main(String[] args) {
+		Print p1 = new Print();
+		p1.delimiter = "----";
+		Print p2 = new Print();
+		p2.delimiter = "****";
+		
+		p1.A();
+		p2.A();
+		p1.B();
+		p2.B();	
+	}	
+} //p1, p2 두 개의 인스턴스를 print 클래스를 이용해서 찍어낸 후, 각각 다른 구분자를 넣어줌
+>>> 위의 코드랑 결과는 똑같음.
