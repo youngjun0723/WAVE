@@ -652,10 +652,267 @@ public class AccountingClassApp {
 		
 	}
 }
-// 이 과정이 빈번하게 발샐한다고 한다면 이렇게 클래스의 내부적인 상태를 바꾸는 행위가 버그를 우발할 가능성이 매우 높다. 
+// 이 과정이 빈번하게 발생한다고 한다면 이렇게 클래스의 내부적인 상태를 바꾸는 행위가 버그를 우발할 가능성이 매우 높다. 
 </code></pre>
 
 ***
 
 2023-05-10
+-------------
+
+* Boolean Datatype
+
+<pre><code>
+public class BooleanApp{
+ 
+    public static void main(String[] args) {
+         
+        System.out.println("One");
+        System.out.println(1);
+         
+        System.out.println(true); // 첫번째 데이터 타입
+        System.out.println(false); // 두번째 데이터 타입
+         
+        String foo = "Hello world";
+        // String true = "Hello world"; reserved word
+
+        // '.contains' 메소드를 사용하면 return 값으로 그 문자열의 입력값으로 전달할 어떤 값이 들어있다면 True를, 없다면 False를 리턴한다.  
+        System.out.println(foo.contains("world")); // foo 안에 값이 있으므로 return : true
+        System.out.println(foo.contains("egoing")); // foo 안에 값이 없으므로 return : false
+ 
+    }
+}
+</code></pre>
+
+* 비교연산자
+
+<pre><code>
+public class ComparisonOperatorApp {
+ 
+    public static void main(String[] args) {
+         
+        System.out.println(1 > 1);  // false
+        System.out.println(1 == 1); // true
+        System.out.println(1 < 1);  // false
+        System.out.println(1 >= 1); // true
+         
+    }
+ 
+}
+</code></pre>
+
+* 조건문 형식
+
+  (조건식)에는 'Boolean'타입만 들어갈 수 있다. 
+
+  조건문은 중첩할 수 있고, if와 else는 하나의 조건문에 한 번만 들어갈 수 있지만, else if는 여러 개가 들어갈 수 있다.
+
+<pre><code>
+public class IfApp {
+ 
+    public static void main(String[] args) {
+ 
+        System.out.println("a");
+        if(false) {
+            System.out.println(1);
+        } else if(true) {
+            System.out.println(2);
+        } else {
+            System.out.println(3);
+        } // 위 조건문의 출력값은 2가 된다.
+        System.out.println("b");
+ 
+    }
+ 
+}
+</code></pre>
+
+* 조건문 응용 1
+
+<pre><code>
+public class AuthApp {
+ 
+    public static void main(String[] args) {
+         
+        String id = "egoing";
+        String inputId = args[0];
+         
+        System.out.println("Hi."); // Hi. 출력
+         
+        //if(inputId == id) 와 같이 사용한다면 의도치 않은 결과를 가져올 수 있다. 
+
+        if(inputId.equals(id)) {                     // String 객체에서는 equals 메소드를 제공하고 있다. 
+            System.out.println("Master!");           // 같다면 Master! 출력
+        } else {
+            System.out.println("Who are you?");      // 아니라면 Who are you? 출력
+        }
+    }
+
+}
+</code></pre>
+
+* 조건문 응용 2
+
+<pre><code>
+public class AuthApp {
+ 
+    public static void main(String[] args) {
+         
+        String id = "egoing";
+        String inputId = args[0];
+         
+        String pass = "1111";  // 비밀번호 1111
+        String inputPass = args[1];
+         
+        System.out.println("Hi.");
+         
+        if(inputId.equals(id) && inputPass.equals(pass)) {   // 논리연산자 &&를 통해서 아이디와 패스워드 둘 다 맞아야 Master! 출력하게 함.
+            System.out.println("Master!");
+        } else {
+            System.out.println("Who are you?");              // 아이디와 패스워드 둘 중 하나라도 틀렸다면 Who are you? 출력
+        }       
+ 
+    }
+ 
+}
+</code></pre>
+
+* == vs equals
+
+  원시(더이상 쪼갤수 없는.. primitive) 데이터 타입 : boolean, byte, char, short, int, long, float, double
+  원시 데이터 타입의 변수는 선언되면 메모리(Stack)에 공간이 할당되며, 그 메모리 공간 안에 실제 값이 들어가게 된다. 
+  그래서 원시 데이터의 경우 == 연산자는 변수가 가리키는 값을 토대로 비교하게 된다.
+
+  클래스(non primitive..)는 new 키워드를 통한 인스턴스가 만들어지는 시점에
+  또다른 메모리 구역(Heap)에서 새로운 공간을 할당하여 값을 저장하고, 변수는 그 값이 저장된 메모리의 주소를 가리키게 된다.
+
+  결론 : primitive 데이터 타입 -> == 연산자 사용 
+        non primitive 데이터 타입 -> equals 사용
+
+* 논리연산자
+  
+  && : AND 둘 중 하나라도 false면 false
+  || : OR 둘 중 하나라도 true면 true
+  !  : NOT ex)  System.out.println(!true); // false 
+<pre><code>
+public class AuthApp2 {
+ 
+    public static void main(String[] args) {
+         
+        String id = "egoing";
+        String inputId = args[0];
+         
+        String pass = "1111";
+        String pass2 = "2222";
+        String inputPass = args[1];
+         
+        System.out.println("Hi.");
+        boolean isRightPass = (inputPass.equals(pass) || inputPass.equals(pass2));  // 둘중 하나라도 true면 true 반환
+        if(inputId.equals(id) && isRightPass ) {
+            System.out.println("Master!");
+        } else {
+            System.out.println("Who are you?");
+        }       
+ 
+    }
+ 
+}
+</code></pre>
+
+* 반복문
+  'while'문에는 'if'문처럼 'boolean' 타입의 조건식을 기입해야한다.
+  'for'문은 사용자가 직접 반복횟수를 지정시킬 때 용이하다.
+  i++ 는 i = i + 1과 같다.
+  'while'문은 자유도가 높고 'for'문은 사용자가 반복횟수를 지정할 수 있기에 자유도가 낮다.
+
+<pre><code>
+public class LoopApp {
+ 
+    public static void main(String[] args) {
+         
+        System.out.println(1);
+        System.out.println("=== while ===");
+        int i = 0;
+        //..
+        while(i < 3) {
+            System.out.println(2);
+            System.out.println(3);
+            //i = i + 1;
+            //..
+            i++;
+        }
+        System.out.println("=== for ===");
+        for(int j=0; j < 3; j++) {
+            System.out.println(2);
+            System.out.println(3);
+        }
+         
+        System.out.println(4);
+ 
+    }
+ 
+}
+</code></pre>
+
+* 배열
+
+  배열은 반복문과 뗄 수 없는 사이이다.
+  배열을 선언할 때는 변수 타입명 뒤에 빈 [ ] 대괄호를 입력하고 변수 이름을 입력한다.
+  초기화를 할 경우에는 new 키워드를 이용하여 [ ] 대괄호 안에 요소의 개수를 입력한다.
+  리터럴로 입력할 수 있는 데이터 타입의 경우, { } 중괄호 안에 요소를 리터럴로 입력할 수 있다.
+  배열은 인덱스를 통해 접근하고 인덱스는 [ ] 대괄호 안에 입력합니다.
+
+<pre><code>
+public class ArrayApp {
+ 
+    public static void main(String[] args) {
+         
+        // egoing, jinhuck, youbin 
+        // String users = "egoing, jinhuck, youbin";
+        String[] users = new String[3];
+        users[0] = "egoing";
+        users[1] = "jinhuck";
+        users[2] = "youbin";
+         
+        System.out.println(users[1]);
+        System.out.println(users.length);
+         
+        int[] scores = {10, 100, 100}; // 원소, element
+        System.out.println(scores[1]);
+        System.out.println(scores.length);
+ 
+    }
+ 
+}
+</code></pre>
+
+* 반복문 + 배열
+
+<pre><code>
+public class LoopArray {
+ 
+    public static void main(String[] args) {
+        /*
+         <li>egoing</li>
+         <li>jinhuck</li>
+         <li>youbin</li>
+         */
+         
+        String[] users = new String[3];
+        users[0] = "egoing";
+        users[1] = "jinhuck";
+        users[2] = "youbin";
+         
+        for(int i=0; i < users.length; i++) {
+            System.out.println(users[i]+",");
+        }
+         // int i = 0;으로 초기화 시킨 뒤 i가 users.length. 즉, 배열의 요소 개수보다 작을때 반복하여 i값을 1씩 증가시킨다.
+    }    // 조건식에서 length를 사용하게 되면 직접 배열의 요소 개수를 입력하지 않아도 되는 편리성을 가지게 된다.
+ 
+}
+</code></pre>
+
+***
+
+2023-05-11
 -------------
